@@ -1,0 +1,17 @@
+.Contenido {
+
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: #eeeeee;
+    padding: 30px;
+}
+
+.ion-icon {
+
+    cursor: pointer;
+}
+
+.abrir {
+    transform: translateX(250px);
+}
