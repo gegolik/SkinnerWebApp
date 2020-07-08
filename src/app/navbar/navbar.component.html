@@ -1,0 +1,43 @@
+<!-- Navbar -->
+<div id="content">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            
+            <button type="button" id="sidebarCollapse" class="navbar-btn" (click)="toggleNavbar()">
+                <ion-icon name="arrow-back"> *ngIf="navbarOpen"></ion-icon>
+                
+                <ion-icon name="arrow-forward"> *ngIf="!navbarOpen"></ion-icon>
+            </button>
+          
+            <div id="navbarSupportedContent">
+                <a class="nav-link" href="#">Configuracion</a>
+                <a class="nav-link" href="#">Notificaciones</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar Holder -->
+<nav id="sidebar" *ngIf="navbarOpen">
+    <div class="sidebar-header">
+      <h3>Skinner</h3>
+    </div>
+  
+    <ul class="list-unstyled components">
+      <li>
+        <a href="#">Pacientes</a>
+      </li>
+      <li>
+        <a href="#">Tratamientos</a>
+      </li>
+      <li>
+        <a href="#">Perfil</a>
+      </li>
+    </ul>
+  
+    <ul class="list-unstyled CTAs">
+      <li>
+        <a href="https://outlook.live.com/">Contacto</a>
+      </li>
+    </ul>
+  </nav>
