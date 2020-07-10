@@ -16,8 +16,9 @@ export class NavbarComponent implements OnInit {
 
   toggleNavbar() {
     this.navbarOpen = !this.navbarOpen;
-    console.log("this.navbarOpen");
+    //console.log(this.navbarOpen);
   }
 
 }
 
+  

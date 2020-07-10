@@ -7,13 +7,21 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./content.component.css']
 })
 export class ContentComponent implements OnInit {
-  
+  respuesta: any = this.userService.getRespuesta();
+   
   constructor(public userService: UserService) {}
 
   ngOnInit(): void {
-    this.userService.getData().subscribe(response => {
-      console.log(response)
+   /* this.userService.getData().subscribe(response => {
+      
+      //this.respuesta = response;
+      //console.log(this.respuesta);
+      
     });
+    */
+    
+
+
   }
 
 }
