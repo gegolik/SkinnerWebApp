@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
+import { catchError } from 'rxjs/operators'; // Para el manejo de errores
+
 
 @Component({
   selector: 'app-content',
@@ -8,18 +10,19 @@ import { UserService } from '../services/user.service';
 })
 export class ContentComponent implements OnInit {
   respuesta: any = this.userService.getRespuesta();
-   
-  constructor(public userService: UserService) {}
+
+  constructor(public userService: UserService) { }
 
   ngOnInit(): void {
-   /* this.userService.getData().subscribe(response => {
-      
-      //this.respuesta = response;
-      //console.log(this.respuesta);
-      
-    });
-    */
-    
+    /*
+    this.userService.getData().subscribe(response => {
+
+      this.respuesta = response;
+      console.log(this.respuesta);
+
+    }); */
+
+
 
 
   }
