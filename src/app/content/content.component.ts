@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
-import { catchError } from 'rxjs/operators'; // Para el manejo de errores
+
 
 
 @Component({
@@ -14,14 +14,9 @@ export class ContentComponent implements OnInit {
   constructor(public userService: UserService) { }
 
   ngOnInit(): void {
-    /*
-    this.userService.getData().subscribe(response => {
 
-      this.respuesta = response;
-      console.log(this.respuesta);
 
-    }); */
-
+    
 
 
 

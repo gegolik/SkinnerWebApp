@@ -1,1 +1,25 @@
-<p>Sidebar works!</p>
+<!-- Sidebar Holder -->
+<nav id="sidebar" *ngIf="this.dataservice.getSidebarOpen()">
+    <div class="sidebar-header">
+      <h3><a [routerLink]="['/']">Skinner</a></h3>
+    </div>
+  
+    <ul class="list-unstyled components">
+      <li>
+        <a href="#">Pacientes</a>
+      </li>
+      <li>
+        <a [routerLink]="['/tratamientos']">Tratamientos</a>
+      </li> 
+      <li>
+        <a href="#">Perfil</a>
+      </li>
+    </ul>
+  
+    <ul class="list-unstyled CTAs">
+      <li>
+        <a href="https://outlook.live.com/">Contacto</a>
+      </li>
+    </ul>
+  </nav>
+

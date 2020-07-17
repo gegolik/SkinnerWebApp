@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '../services/data.service';
 
 
 @Component({
@@ -8,17 +9,15 @@ import { Component, OnInit } from '@angular/core';
   
 })
 export class NavbarComponent implements OnInit {
-  navbarOpen: boolean = true;
-  constructor() { }
+  constructor(public dataservice: DataService) { }
 
   ngOnInit(): void {
   }
 
-  toggleNavbar() {
-    this.navbarOpen = !this.navbarOpen;
-    //console.log(this.navbarOpen);
-  }
+  toggleSidebar() {
+    this.dataservice.setSidebarOpen(!this.dataservice.getSidebarOpen())
+    console.log(this.dataservice.getSidebarOpen());
 
 }
 
-  
+}

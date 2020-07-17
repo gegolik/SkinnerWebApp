@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -6,10 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
- 
   
-  constructor() { }
+  
+  constructor(public dataservice: DataService) { }
 
   ngOnInit(): void {}
-
+  sidebarOpen: boolean = this.dataservice.getSidebarOpen();
 }
