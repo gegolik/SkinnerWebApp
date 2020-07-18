@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ErrorHandler, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TratamientoContentComponent } from './tratamiento-content/tratamiento-content.component';
 import { Routes, RouterModule } from '@angular/router';
+import {FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 //Rutas de la web
 const rutas: Routes = [
@@ -33,10 +34,16 @@ const rutas: Routes = [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    RouterModule.forRoot(rutas)
+    RouterModule.forRoot(rutas),
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class AppModule { }
+export class AppModule {}
+
+
+
+
+

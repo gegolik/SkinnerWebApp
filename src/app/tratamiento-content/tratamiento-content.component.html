@@ -1,1 +1,32 @@
-<p>tratamiento-content works!</p>
+<p>{{tratamiento.titulo}}, {{tratamiento.tipoLesion}}, {{tratamiento.descripcion}}</p>
+
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                <label for="usr">Titulo de Tratamiento</label>
+                <input type="text" [(ngModel)]="tratamiento.titulo" class="form-control"> 
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                <label for="usr">Tipo de Lesion</label>
+                <input type="text" class="form-control"> 
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label for="usr">Descripcion</label>
+                <input type="text" class="form-control"> 
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+        <button type="button" class="btn btn-primary btn-blok">Guardar</button>
+    </div>
+    </div>
+
+</div>
