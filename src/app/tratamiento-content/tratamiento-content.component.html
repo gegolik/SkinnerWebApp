@@ -1,32 +1,35 @@
-<p>{{tratamiento.titulo}}, {{tratamiento.tipoLesion}}, {{tratamiento.descripcion}}</p>
-
 <div class="container">
     <div class="row">
         <div class="col-6">
             <div class="form-group">
-                <label for="usr">Titulo de Tratamiento</label>
-                <input type="text" [(ngModel)]="tratamiento.titulo" class="form-control"> 
-            </div>
-        </div>
-        <div class="col-6">
-            <div class="form-group">
-                <label for="usr">Tipo de Lesion</label>
-                <input type="text" class="form-control"> 
+                <label for="usr">Tipo de Lesión</label>
+                <select [(ngModel)]="nuevoTratamiento.tipoLesion" class="form-control">
+                    <option *ngFor="let item of items" [ngValue]="item.value">{{ item.value }} - {{ item.article }}
+                    </option>
+                </select>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-12">
             <div class="form-group">
-                <label for="usr">Descripcion</label>
-                <input type="text" class="form-control"> 
+                <label for="usr">Título de Tratamiento</label>
+                <input type="text" minlength="1" maxlength="65" [(ngModel)]="nuevoTratamiento.titulo" class="form-control">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label for="usr">Descripción</label>
+                <p><textarea [(ngModel)]="nuevoTratamiento.descripcion" minlength="1" maxlength="1000" cols="80" rows="15"></textarea></p>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-6">
-        <button type="button" class="btn btn-primary btn-blok">Guardar</button>
-    </div>
+            <button type="button" (click)="persistirTratamiento()" class="btn btn-primary btn-blok">Guardar</button>
+        </div>
     </div>
 
 </div>

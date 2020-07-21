@@ -44,6 +44,11 @@ const rutas: Routes = [
 export class AppModule {}
 
 
-
+export class tratamientoObject{
+  codigo: number;
+  titulo: string;
+  descripcion: string;
+  tipoLesioon: string
+}
 
 
