@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {tratamientoObject} from '../Models/tratamiento_model';
+import {Popup} from 'ng2-opd-popup';
 
 @Component({
   selector: 'app-tratamiento-content',
@@ -13,7 +14,7 @@ export class TratamientoContentComponent implements OnInit {
   
   items: Array<any> = [{ article: 'Melanoma', value: 1 ,defaultSelected: true}, { article: 'Vitiligo', value: 2 }, { article: 'Psoriasis', value: 3 }];
   selectedValue: string = '';
-     
+  pop_altaTratamiento: Popup;   
     
 
 
@@ -26,6 +27,8 @@ export class TratamientoContentComponent implements OnInit {
   
   public persistirTratamiento() {
     console.log(this.nuevoTratamiento);
+    this.pop_altaTratamiento.show();
+
   }
 
 }

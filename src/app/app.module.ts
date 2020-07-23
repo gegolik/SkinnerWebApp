@@ -11,6 +11,7 @@ import { ErrorHandler, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TratamientoContentComponent } from './tratamiento-content/tratamiento-content.component';
 import { Routes, RouterModule } from '@angular/router';
 import {FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {PopupModule} from 'ng2-opd-popup';
 
 //Rutas de la web
 const rutas: Routes = [
@@ -35,6 +36,7 @@ const rutas: Routes = [
     AppRoutingModule,
     HttpClientModule,
     RouterModule.forRoot(rutas),
+    PopupModule.forRoot(),
     FormsModule
   ],
   providers: [],
