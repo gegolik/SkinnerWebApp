@@ -1,17 +1,24 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
+
+//COMPONENTES
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ContentComponent } from './content/content.component';
+import { TratamientoContentComponent } from './tratamiento-content/tratamiento-content.component';
+//SERVICIOS
 import { HttpClientModule } from '@angular/common/http';
 import { ErrorHandler, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { TratamientoContentComponent } from './tratamiento-content/tratamiento-content.component';
+
+//OTROS
 import { Routes, RouterModule } from '@angular/router';
 import {FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {PopupModule} from 'ng2-opd-popup';
+
+
+//MODELS
+//import { tratamientoObject } from './Models/tratamiento_model';
 
 //Rutas de la web
 const rutas: Routes = [
@@ -36,7 +43,6 @@ const rutas: Routes = [
     AppRoutingModule,
     HttpClientModule,
     RouterModule.forRoot(rutas),
-    PopupModule.forRoot(),
     FormsModule
   ],
   providers: [],
@@ -44,13 +50,4 @@ const rutas: Routes = [
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {}
-
-
-export class tratamientoObject{
-  codigo: number;
-  titulo: string;
-  descripcion: string;
-  tipoLesioon: string
-}
-
 

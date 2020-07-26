@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {tratamientoObject} from '../Models/tratamiento_model';
-import {Popup} from 'ng2-opd-popup';
+import { TratamientoService } from '../services/tratamiento.service';
+import { tratamientoObject } from '../Models/tratamiento_model';
+
 
 @Component({
   selector: 'app-tratamiento-content',
@@ -8,27 +9,54 @@ import {Popup} from 'ng2-opd-popup';
   styleUrls: ['./tratamiento-content.component.css']
 })
 export class TratamientoContentComponent implements OnInit {
-  
-  
-  nuevoTratamiento: any = {titulo:"", tipoLesion:"", descripcion:""};
-  
-  items: Array<any> = [{ article: 'Melanoma', value: 1 ,defaultSelected: true}, { article: 'Vitiligo', value: 2 }, { article: 'Psoriasis', value: 3 }];
+
+  tratamientos: Array<tratamientoObject>;
+  nuevoTratamiento: tratamientoObject = new tratamientoObject();
+
+  lesionItems: Array<any> = [{ name: 'Melanoma', value: 1, defaultSelected: true }, { name: 'Vitiligo', value: 2 }, { name: 'Psoriasis', value: 3 }];
   selectedValue: string = '';
-  pop_altaTratamiento: Popup;   
-    
 
 
-  constructor() { }
+  constructor(private tratservice: TratamientoService) { }
 
   ngOnInit(): void {
-  
-    this.selectedValue = this.items.filter(a => a.defaultSelected)[0].value;
-  }
-  
-  public persistirTratamiento() {
-    console.log(this.nuevoTratamiento);
-    this.pop_altaTratamiento.show();
+
+    this.selectedValue = this.lesionItems.filter(a => a.defaultSelected)[0].value;
+    this.tratamientos = this.tratservice.getTratamientos();
+    console.log(this.tratamientos);
+    itemToRemove: Number;
 
   }
+
+  public persistirTratamiento(trat: tratamientoObject) {
+    const index = this.tratamientos.indexOf(trat);
+    if(index != -1){
+      this.tratamientos.splice(index,1); 
+      console.log(index)    
+     }
+     
+    this.tratservice.addTratamiento(JSON.parse(JSON.stringify(this.nuevoTratamiento)));
+     
+    
+    this.limpiarTratamiento();
+  }
+
+  public limpiarTratamiento() {
+    this.nuevoTratamiento = new tratamientoObject();
+  }
+
+  public removeTratamiento (trat: tratamientoObject){
+    if(confirm("¿Desea eliminar el tratamiento?")) {
+      const index = this.tratamientos.indexOf(trat);
+      console.log(trat);
+      this.tratamientos.splice(index,1);
+    }
+  }
+
+  public assignTratamiento(trat: tratamientoObject){
+    this.nuevoTratamiento = trat;
+  }
+  
+
 
 }
