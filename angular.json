@@ -88,7 +88,10 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/@fullcalendar/common/main.css",
+              "node_modules/@fullcalendar/daygrid/main.css",
               "src/styles.css"
+              
             ],
             "scripts": []
           }

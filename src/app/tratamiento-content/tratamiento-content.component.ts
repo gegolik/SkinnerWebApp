@@ -30,14 +30,10 @@ export class TratamientoContentComponent implements OnInit {
 
   public persistirTratamiento(trat: tratamientoObject) {
     const index = this.tratamientos.indexOf(trat);
-    if(index != -1){
-      this.tratamientos.splice(index,1); 
-      console.log(index)    
-     }
-     
+    if (index != -1) {
+      this.tratservice.deleteTratamiento(trat);;
+    }
     this.tratservice.addTratamiento(JSON.parse(JSON.stringify(this.nuevoTratamiento)));
-     
-    
     this.limpiarTratamiento();
   }
 
@@ -45,18 +41,16 @@ export class TratamientoContentComponent implements OnInit {
     this.nuevoTratamiento = new tratamientoObject();
   }
 
-  public removeTratamiento (trat: tratamientoObject){
-    if(confirm("¿Desea eliminar el tratamiento?")) {
-      const index = this.tratamientos.indexOf(trat);
-      console.log(trat);
-      this.tratamientos.splice(index,1);
+  public removeTratamiento(trat: tratamientoObject) {
+    if (confirm("¿Desea eliminar el tratamiento?")) {
+      this.tratservice.deleteTratamiento(trat);
     }
   }
 
-  public assignTratamiento(trat: tratamientoObject){
+  public assignTratamiento(trat: tratamientoObject) {
     this.nuevoTratamiento = trat;
   }
-  
+
 
 
 }

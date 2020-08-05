@@ -8,6 +8,11 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ContentComponent } from './content/content.component';
 import { TratamientoContentComponent } from './tratamiento-content/tratamiento-content.component';
+import { CalendarComponent } from './calendar/calendar.component';
+import { FullCalendarModule } from '@fullcalendar/angular'; 
+import dayGridPlugin from '@fullcalendar/daygrid'; 
+import interactionPlugin from '@fullcalendar/interaction'; 
+
 //SERVICIOS
 import { HttpClientModule } from '@angular/common/http';
 import { ErrorHandler, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -24,11 +29,15 @@ import {FormsModule, ReactiveFormsModule } from '@angular/forms';
 const rutas: Routes = [
   { path: '', component: ContentComponent }
   ,{ path: 'tratamientos', component:TratamientoContentComponent}
+  ,{ path: 'calendar', component:CalendarComponent}
   //,{ path: 'pacientes', component:PacientesContentComponent}
   //,{ path: 'miperfil', component:PerfilContentComponent}
   //,{ path: 'configuracion', component:ConfiguracionContentComponent}
 ];
 
+FullCalendarModule.registerPlugins([ 
+  dayGridPlugin,
+  interactionPlugin])
 
 @NgModule({
   declarations: [
@@ -36,14 +45,16 @@ const rutas: Routes = [
     SidebarComponent,
     NavbarComponent,
     ContentComponent,
-    TratamientoContentComponent
+    TratamientoContentComponent,
+    CalendarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     RouterModule.forRoot(rutas),
-    FormsModule
+    FormsModule,
+    FullCalendarModule 
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -23,11 +23,11 @@ export class TratamientoService {
 
   addTratamiento(trat: tratamientoObject) {
     this.tratamientos.push(trat);
-
   }
 
-  deleteTratamiento(codigo: number) {
-    this.tratamientos.splice(codigo, 1);
+  deleteTratamiento(trat: tratamientoObject) {
+    const index = this.tratamientos.indexOf(trat);
+    this.tratamientos.splice(index,1)
 
   }
 
