@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,9 @@ export class UserService {
   }
 
   public getData() {
-    
-    return this.http.get("http://localhost:8080/paciente/1");
+
+
+    return this.http.get("http://localhost:8080/usuarios");
   }
 
   public getRespuesta(){

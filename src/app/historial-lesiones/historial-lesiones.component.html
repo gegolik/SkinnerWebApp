@@ -1,0 +1,15 @@
+<table *ngFor="let historial of historialLesion"class="table table-bordered" > 
+    <tr>
+    <td colspan="2" class="col-sm-2 col-xs-2"><img class='h-25' src="data:image/png;base64,{{historial.imagen}}"></td></tr>
+    <tr>
+        <td td class="col-xl-2 col-xl-2" style="text-align: center;vertical-align: middle;width:50%">
+       {{historial.descripcion}} 
+        </td>
+        <td class="col-xl-2 col-xl-2" style="text-align: center;vertical-align: middle;width:50%">
+            Fecha de la foto: {{historial.fecha| date:"MM/dd/yyyy 'a las' HH:mm"}} 
+        </td>
+
+    </tr>
+    <tr>
+        <td colspan="2" class="col-sm-2 col-xs-2"> Resultados del analisis: {{historial.analisis}} </td></tr>
+</table>

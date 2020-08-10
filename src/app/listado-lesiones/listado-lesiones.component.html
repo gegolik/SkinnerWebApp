@@ -1,0 +1,8 @@
+<table class="table table-bordered"> 
+    <tr *ngFor="let lesiones of respuesta">
+        <td class="col-sm-4 col-xs-4" style="text-align: center;vertical-align: middle;">
+       {{lesiones.descripcion}} 
+        </td>
+        <td> <a [routerLink]="['/historial-lesiones',lesiones.id]"><img class='h-25' src="{{getUrl(lesiones.imagen)}}"></a></td>
+    </tr>
+</table>

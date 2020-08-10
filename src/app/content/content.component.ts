@@ -9,9 +9,11 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./content.component.css']
 })
 export class ContentComponent implements OnInit {
-  respuesta: any = this.userService.getRespuesta();
+  respuesta=[]
 
-  constructor(public userService: UserService) { }
+  constructor(public userService: UserService) {
+  this.userService.getData().subscribe((users: any)=>{this.respuesta=users});
+  }
 
   ngOnInit(): void {
 

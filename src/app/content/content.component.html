@@ -1,7 +1,16 @@
 <!-- Content -->
 
+<table>
+<tr *ngFor="let pacientes of respuesta">
+    <td>
+   {{pacientes.nombre}} {{pacientes.apellido}} 
+    </td>
+    <td><a [routerLink]="['/listado-lesiones',pacientes.id]">Ver lesiones</a></td>
+</tr>
+</table>
+<!--
 <div class="estilo-contenedor">
-  <h4>Paciente {{respuesta.apellido}}, {{respuesta.nombre}} </h4>
+  <h4>Paciente {{respuesta.nombre}}, {{respuesta.nombre}} </h4>
   <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
       <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -35,3 +44,4 @@
     <div class="line"></div>
 
   </div>
+-->
