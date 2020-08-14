@@ -4,7 +4,6 @@ import { AppRoutingModule } from './app-routing.module';
 
 //COMPONENTES
 import { AppComponent } from './app.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ContentComponent } from './content/content.component';
 import { TratamientoContentComponent } from './tratamiento-content/tratamiento-content.component';
@@ -46,7 +45,6 @@ FullCalendarModule.registerPlugins([
 @NgModule({
   declarations: [
     AppComponent,
-    SidebarComponent,
     NavbarComponent,
     ContentComponent,
     TratamientoContentComponent,
