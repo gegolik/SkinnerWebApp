@@ -9,8 +9,12 @@ import { ContentComponent } from './content/content.component';
 import { TratamientoContentComponent } from './tratamiento-content/tratamiento-content.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { FullCalendarModule } from '@fullcalendar/angular'; 
-import dayGridPlugin from '@fullcalendar/daygrid'; 
 import interactionPlugin from '@fullcalendar/interaction'; 
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import listPlugin from '@fullcalendar/list';
+
+
 
 //SERVICIOS
 import { HttpClientModule } from '@angular/common/http';
@@ -38,9 +42,12 @@ const rutas: Routes = [
   //,{ path: 'configuracion', component:ConfiguracionContentComponent}
 ];
 
-FullCalendarModule.registerPlugins([ 
+FullCalendarModule.registerPlugins([
   dayGridPlugin,
-  interactionPlugin])
+  timeGridPlugin,
+  listPlugin,
+  interactionPlugin
+])
 
 @NgModule({
   declarations: [
