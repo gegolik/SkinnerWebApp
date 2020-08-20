@@ -1,8 +1,9 @@
 import { Calendar } from '@fullcalendar/core';
 import { Component, OnInit } from '@angular/core';
-
+import { CalendarioService } from '../services/calendario.service';
 import { CalendarOptions, DateSelectArg, EventClickArg, EventApi } from '@fullcalendar/angular';
 import { INITIAL_EVENTS, createEventId } from './event-utils';
+import { EventInput } from '@fullcalendar/angular';
 
 
 
@@ -15,6 +16,12 @@ import { INITIAL_EVENTS, createEventId } from './event-utils';
 
 
 export class CalendarComponent {
+  respuesta :  EventInput[]
+
+  constructor(public calendario: CalendarioService) {
+  this.calendario.getCalendario().subscribe((calendario: any)=>{this.respuesta=calendario});
+  
+}
 
   calendarVisible = true;
   calendarOptions: CalendarOptions = {
@@ -24,7 +31,8 @@ export class CalendarComponent {
       right: 'dayGridMonth,timeGridWeek,timeGridDay'
     },
     initialView: 'timeGridWeek',
-    initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
+    //initialEvents: this.respuesta, // alternatively, use the `events` setting to fetch from a feed
+    events:"http://localhost:8080/agenda/2",
     weekends: true,
     editable: true,
     selectable: true,
@@ -51,7 +59,7 @@ export class CalendarComponent {
   }
 
   handleDateSelect(selectInfo: DateSelectArg) {
-    const title = prompt('Please enter a new title for your event');
+    const title = prompt('Porfavor pongale un titulo al evento');
     const calendarApi = selectInfo.view.calendar;
 
     calendarApi.unselect(); // clear date selection
@@ -64,12 +72,16 @@ export class CalendarComponent {
         end: selectInfo.endStr,
         allDay: selectInfo.allDay
       });
+      this.calendario.addEvento(1,2,title,selectInfo.startStr,selectInfo.endStr).subscribe((cosa: any)=>{console.log(cosa)});
+
     }
   }
 
   handleEventClick(clickInfo: EventClickArg) {
-    if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
+    if (confirm(`¿Esta seguro de querer eliminar el evento '${clickInfo.event.title}'`)) {
       clickInfo.event.remove();
+      
+      this.calendario.deleteEvento(parseInt(clickInfo.event.id)).subscribe();
     }
   }
 

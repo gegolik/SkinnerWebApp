@@ -46,7 +46,7 @@ FullCalendarModule.registerPlugins([
   dayGridPlugin,
   timeGridPlugin,
   listPlugin,
-  // interactionPlugin
+   interactionPlugin
 ])
 
 @NgModule({
