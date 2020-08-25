@@ -4,6 +4,7 @@ import { CalendarioService } from '../services/calendario.service';
 import { CalendarOptions, DateSelectArg, EventClickArg, EventApi } from '@fullcalendar/angular';
 import { INITIAL_EVENTS, createEventId } from './event-utils';
 import { EventInput } from '@fullcalendar/angular';
+import esLocale from '@fullcalendar/core/locales/es';
 
 
 
@@ -40,7 +41,8 @@ export class CalendarComponent {
     dayMaxEvents: true,
     select: this.handleDateSelect.bind(this),
     eventClick: this.handleEventClick.bind(this),
-    eventsSet: this.handleEvents.bind(this)
+    eventsSet: this.handleEvents.bind(this),
+    locale: esLocale
     /* you can update a remote database when these fire:
     eventAdd:
     eventChange:

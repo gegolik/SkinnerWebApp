@@ -21,11 +21,12 @@
                 <th>Código</th>
                 <th>Tipo Lesión</th>
                 <th>Título</th>
+                <th>Descripcion</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let tratamiento of tratamientos">
+            <tr *ngFor="let tratamiento of listaTratamientos">
                 <td>
                     <!-- Boton de seleccion -->
                     <div class="form-check">
@@ -33,9 +34,10 @@
                             value="option1" (click)=assignTratamiento(tratamiento)>
                     </div>
                 </td>
-                <td>{{tratamiento.codigo}}</td>
-                <td>{{tratamiento.tipoLesion}}</td>
+                <td>{{tratamiento.id}}</td>
+                <td>{{tratamiento.tipolesion}}</td>
                 <td>{{tratamiento.titulo}}</td>
+                <td>{{tratamiento.descripcion}}</td>
                 <td>
                     <!-- Boton para Eliminar -->
                     <button type="button" class="close" aria-label="Close"
@@ -57,7 +59,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="altaTratamientoLabel">Nuevo Tratamiento</h5>
+                <h5 class="modal-title" id="altaTratamientoLabel">Tratamiento</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -98,7 +100,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
                 <!-- Boton disparador Modal confirmacion -->
-                <button type="button" (click)="persistirTratamiento(nuevoTratamiento)" class="btn btn-primary"
+                <button type="button" (click)="agregarTratamiento(nuevoTratamiento)" class="btn btn-primary"
                     data-toggle="modal" data-target=".bd-example-modal-sm" data-dismiss="modal">Guardar</button>
             </div>
         </div>

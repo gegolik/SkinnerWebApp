@@ -4,3 +4,59 @@
       [options]='calendarOptions'
     ></full-calendar>
   </div>
+
+  <div class="modal fade" id="altaTratamiento" tabindex="-1" role="dialog" aria-labelledby="altaTratamientoLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="altaTratamientoLabel">Tratamiento</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!--
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="usr">Tipo de Lesión</label>
+                            <select [(ngModel)]="nuevoTratamiento.tipoLesion" class="form-control">
+                                <option *ngFor="let lesionItem of lesionItems" [ngValue]="lesionItem.value">
+                                    {{ lesionItem.value }} -
+                                    {{ lesionItem.name }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="usr">Título de Tratamiento</label>
+                            <input type="text" minlength="1" maxlength="65" [(ngModel)]="nuevoTratamiento.titulo"
+                                class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="usr">Descripción</label>
+                            <p><textarea [(ngModel)]="nuevoTratamiento.descripcion" minlength="1" maxlength="1000"
+                                    cols="60" rows="10"></textarea></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
+                <!-- Boton disparador Modal confirmacion -->
+              <!--  <button type="button" (click)="agregarTratamiento(nuevoTratamiento)" class="btn btn-primary"
+                    data-toggle="modal" data-target=".bd-example-modal-sm" data-dismiss="modal">Guardar</button>
+                    -->
+            </div>
+        </div>
+    </div>
+</div>

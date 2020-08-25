@@ -10,19 +10,24 @@ import { tratamientoObject } from '../Models/tratamiento_model';
 })
 export class TratamientoContentComponent implements OnInit {
 
-  tratamientos: Array<tratamientoObject>;
+  tratamientos:any
   nuevoTratamiento: tratamientoObject = new tratamientoObject();
 
   lesionItems: Array<any> = [{ name: 'Melanoma', value: 1, defaultSelected: true }, { name: 'Vitiligo', value: 2 }, { name: 'Psoriasis', value: 3 }];
   selectedValue: string = '';
+  listaTratamientos: any;
 
 
-  constructor(private tratservice: TratamientoService) { }
+  constructor(public tratservice: TratamientoService) { 
+
+    this.tratservice.getTratamientos().subscribe((tratamientos: any)=>{this.listaTratamientos=tratamientos});
+
+  }
 
   ngOnInit(): void {
 
+
     this.selectedValue = this.lesionItems.filter(a => a.defaultSelected)[0].value;
-    this.tratamientos = this.tratservice.getTratamientos();
     console.log(this.tratamientos);
     itemToRemove: Number;
 
@@ -31,19 +36,23 @@ export class TratamientoContentComponent implements OnInit {
   public persistirTratamiento(trat: tratamientoObject) {
     const index = this.tratamientos.indexOf(trat);
     if (index != -1) {
-      this.tratservice.deleteTratamiento(trat);;
+      this.tratservice.deleteTratamiento(this.tratamientos);;
     }
     this.tratservice.addTratamiento(JSON.parse(JSON.stringify(this.nuevoTratamiento)));
     this.limpiarTratamiento();
+  }
+  public agregarTratamiento(trat: tratamientoObject) {
+
+    this.tratservice.addTratamiento(JSON.parse(JSON.stringify(this.nuevoTratamiento)));
   }
 
   public limpiarTratamiento() {
     this.nuevoTratamiento = new tratamientoObject();
   }
 
-  public removeTratamiento(trat: tratamientoObject) {
+  public removeTratamiento(tratamiento: any) {
     if (confirm("¿Desea eliminar el tratamiento?")) {
-      this.tratservice.deleteTratamiento(trat);
+      this.tratservice.deleteTratamiento(parseInt(tratamiento.id)).subscribe((cosa: any)=>{console.log(cosa)});
     }
   }
 
