@@ -6,6 +6,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ContentComponent } from './content/content.component';
+import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './home/home.component';
+import {CookieService} from 'ngx-cookie-service';
+
 import { TratamientoContentComponent } from './tratamiento-content/tratamiento-content.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { FullCalendarModule } from '@fullcalendar/angular'; 
@@ -32,11 +36,14 @@ import { HistorialLesionesComponent } from './historial-lesiones/historial-lesio
 
 //Rutas de la web
 const rutas: Routes = [
-  { path: '', component: ContentComponent }
+  //{ path: '', pathMatch: 'full', redirectTo: 'home'},
+  { path: 'home', component: HomeComponent}
+  ,{ path: '', component: ContentComponent }
   ,{ path: 'tratamientos', component:TratamientoContentComponent}
   ,{ path: 'calendar', component:CalendarComponent}
   ,{ path: 'listado-lesiones/:id', component:ListadoLesionesComponent}
   ,{ path: 'historial-lesiones/:id', component:HistorialLesionesComponent}
+  ,{ path: 'login', component: LoginComponent}
   //,{ path: 'pacientes', component:PacientesContentComponent}
   //,{ path: 'miperfil', component:PerfilContentComponent}
   //,{ path: 'configuracion', component:ConfiguracionContentComponent}
@@ -57,7 +64,9 @@ FullCalendarModule.registerPlugins([
     TratamientoContentComponent,
     CalendarComponent,
     ListadoLesionesComponent,
-    HistorialLesionesComponent
+    HistorialLesionesComponent,
+    HomeComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +76,7 @@ FullCalendarModule.registerPlugins([
     FormsModule,
     FullCalendarModule 
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

@@ -1,5 +1,5 @@
 
-  <div id="page-content-wrapper">
+  <div id="page-content-wrapper" [hidden]="!authenticated()">
 <table>
   <tr *ngFor="let pacientes of respuesta">
       <td>
@@ -9,3 +9,7 @@
   </tr>
   </table>
 </div>
+
+  <div [hidden]="authenticated()">
+    <p>Conectate primero para ver esta seccion</p>
+  </div>

@@ -7,9 +7,12 @@
             class="d-inline-block align-top" alt="" loading="lazy">
           <a class="title">Skinner App</a> </div>
         <div class="list-group list-group-flush">
+            <a href="/home" class="list-group-item list-group-item-action bg-light">Home</a>
           <a href="#" class="list-group-item list-group-item-action bg-light">Pacientes</a>
           <a [routerLink]="['/tratamientos']" class="list-group-item list-group-item-action bg-light">Tratamientos</a>
           <a [routerLink]="['/calendar']" class="list-group-item list-group-item-action bg-light">Agenda</a>
+          <a [routerLink]="['/login']" class="list-group-item list-group-item-action bg-light">Login</a>
+          <a href="#"(click)="logout()" class="list-group-item list-group-item-action bg-light">Logout</a>
           <a href="#" class="list-group-item list-group-item-action bg-light">Contacto</a>
         </div>
       </div>

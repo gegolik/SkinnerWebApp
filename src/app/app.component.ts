@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import * as $ from 'jquery';
 import { UserService } from './services/user.service';
 import { AppserviceService } from './services/appservice.service';
-import { ActivatedRoute } from '@angular/router';
-
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -12,11 +11,19 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AppComponent {  respuesta=[]
   cantNotificaciones: any;
+  http: any;
+  private cookieValue: string;
 
-  constructor(public userService: UserService, public appService:AppserviceService,private route:ActivatedRoute) {
+  constructor(public userService: UserService, public appService:AppserviceService,private route:ActivatedRoute,private router: Router) {
   this.userService.getData().subscribe((users: any)=>{this.respuesta=users});
   var id=this.route.snapshot.params.id;
   this.appService.getNotificaciones(6).subscribe((notificaciones: any)=>{this.cantNotificaciones=notificaciones});
+  this.appService.estoyAutenticado();
+  }
+  logout() {
+    this.appService.authenticated = false;
+    this.appService.logOut();
+    this.router.navigateByUrl('/login');
 
   }
   title = 'SkineerWebApp';

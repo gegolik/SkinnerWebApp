@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
+import { AppserviceService } from '../services/appservice.service';
 
 
 
@@ -11,10 +12,10 @@ import { UserService } from '../services/user.service';
 export class ContentComponent implements OnInit {
   respuesta=[]
 
-  constructor(public userService: UserService) {
+  constructor(public userService: UserService,public app:AppserviceService) {
   this.userService.getData().subscribe((users: any)=>{this.respuesta=users});
   }
-
+  authenticated() { return this.app.authenticated; }
   ngOnInit(): void {
 
 
