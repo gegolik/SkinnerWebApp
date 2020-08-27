@@ -61,21 +61,26 @@ export class CalendarComponent {
   }
 
   handleDateSelect(selectInfo: DateSelectArg) {
-    const title = prompt('Porfavor pongale un titulo al evento');
+    const title = prompt('Por favor añada titulo al evento');
+    
+
     const calendarApi = selectInfo.view.calendar;
 
     calendarApi.unselect(); // clear date selection
 
     if (title) {
-      calendarApi.addEvent({
-        id: createEventId(),
-        title,
-        start: selectInfo.startStr,
-        end: selectInfo.endStr,
-        allDay: selectInfo.allDay
-      });
-      this.calendario.addEvento(1,2,title,selectInfo.startStr,selectInfo.endStr).subscribe((cosa: any)=>{console.log(cosa)});
-
+      const paciente = prompt('Por favor añada un paciente al evento: ' + title);
+      if (paciente) {
+        calendarApi.addEvent({
+          id: createEventId(),
+          title,
+          start: selectInfo.startStr,
+          end: selectInfo.endStr,
+          allDay: selectInfo.allDay,
+          description: 'Lecture'
+        });
+        this.calendario.addEvento(1, 2, title, selectInfo.startStr, selectInfo.endStr).subscribe((cosa: any) => { console.log(cosa) });
+      }
     }
   }
 
