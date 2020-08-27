@@ -21,6 +21,7 @@ export class CalendarComponent {
   showModal: boolean;
   title: String;
   color: String;
+  selectInfo:any;
   @ViewChild('formCreacion') formCreacion: ElementRef;
 
 
@@ -66,7 +67,7 @@ export class CalendarComponent {
   }
 
   handleDateSelect(selectInfo: DateSelectArg) {
-    $('#formCreacion').modal("show");
+    $('#formCreacion').modal("show").data(selectInfo);
     // const title = prompt('Por favor añada titulo al evento');
     
 
@@ -91,7 +92,27 @@ export class CalendarComponent {
   }
 
   addNewEvent(title){
-    console.log(title)
+  
+    
+
+     const calendarApi = this.selectInfo.view.calendar;
+
+     calendarApi.unselect(); // clear date selection
+
+     if (title) {
+       const paciente = prompt('Por favor añada un paciente al evento: ' + title);
+       if (paciente) {
+         calendarApi.addEvent({
+           id: createEventId(),
+           title,
+           start: this.selectInfo.startStr,
+           end: this.selectInfo.endStr,
+           allDay: this.selectInfo.allDay,
+           description: 'Lecture'
+         });
+         this.calendario.addEvento(1, 2, title, this.selectInfo.startStr, this.selectInfo.endStr).subscribe((cosa: any) => { console.log(cosa) });
+       }
+     }
   }
 
   handleEventClick(clickInfo: EventClickArg) {

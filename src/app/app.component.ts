@@ -13,8 +13,9 @@ export class AppComponent {  respuesta=[]
   cantNotificaciones: any;
   http: any;
   private cookieValue: string;
+  credentials = {username: '', password: ''};
 
-  constructor(public userService: UserService, public appService:AppserviceService,private route:ActivatedRoute,private router: Router) {
+  constructor(private app: AppserviceService,public userService: UserService, public appService:AppserviceService,private route:ActivatedRoute,private router: Router) {
   this.userService.getData().subscribe((users: any)=>{this.respuesta=users});
   var id=this.route.snapshot.params.id;
   this.appService.getNotificaciones(6).subscribe((notificaciones: any)=>{this.cantNotificaciones=notificaciones});
@@ -25,6 +26,12 @@ export class AppComponent {  respuesta=[]
     this.appService.logOut();
     this.router.navigateByUrl('/login');
 
+  }
+  login() {
+    this.app.authenticate(this.credentials, () => {
+        this.router.navigateByUrl('/');
+    });
+    return false;
   }
   title = 'SkineerWebApp';
   ngOnInit() {
