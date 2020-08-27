@@ -1,11 +1,11 @@
 import { Calendar } from '@fullcalendar/core';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { CalendarioService } from '../services/calendario.service';
 import { CalendarOptions, DateSelectArg, EventClickArg, EventApi } from '@fullcalendar/angular';
 import { INITIAL_EVENTS, createEventId } from './event-utils';
 import { EventInput } from '@fullcalendar/angular';
 import esLocale from '@fullcalendar/core/locales/es';
-
+declare var $: any 
 
 
 @Component({
@@ -18,6 +18,11 @@ import esLocale from '@fullcalendar/core/locales/es';
 
 export class CalendarComponent {
   respuesta :  EventInput[]
+  showModal: boolean;
+  title: String;
+  color: String;
+  @ViewChild('formCreacion') formCreacion: ElementRef;
+
 
   constructor(public calendario: CalendarioService) {
   this.calendario.getCalendario().subscribe((calendario: any)=>{this.respuesta=calendario});
@@ -61,35 +66,45 @@ export class CalendarComponent {
   }
 
   handleDateSelect(selectInfo: DateSelectArg) {
-    const title = prompt('Por favor añada titulo al evento');
+    $('#formCreacion').modal("show");
+    // const title = prompt('Por favor añada titulo al evento');
     
 
-    const calendarApi = selectInfo.view.calendar;
+    // const calendarApi = selectInfo.view.calendar;
 
-    calendarApi.unselect(); // clear date selection
+    // calendarApi.unselect(); // clear date selection
 
-    if (title) {
-      const paciente = prompt('Por favor añada un paciente al evento: ' + title);
-      if (paciente) {
-        calendarApi.addEvent({
-          id: createEventId(),
-          title,
-          start: selectInfo.startStr,
-          end: selectInfo.endStr,
-          allDay: selectInfo.allDay,
-          description: 'Lecture'
-        });
-        this.calendario.addEvento(1, 2, title, selectInfo.startStr, selectInfo.endStr).subscribe((cosa: any) => { console.log(cosa) });
-      }
-    }
+    // if (title) {
+    //   const paciente = prompt('Por favor añada un paciente al evento: ' + title);
+    //   if (paciente) {
+    //     calendarApi.addEvent({
+    //       id: createEventId(),
+    //       title,
+    //       start: selectInfo.startStr,
+    //       end: selectInfo.endStr,
+    //       allDay: selectInfo.allDay,
+    //       description: 'Lecture'
+    //     });
+    //     this.calendario.addEvento(1, 2, title, selectInfo.startStr, selectInfo.endStr).subscribe((cosa: any) => { console.log(cosa) });
+    //   }
+    // }
+  }
+
+  addNewEvent(title){
+    console.log(title)
   }
 
   handleEventClick(clickInfo: EventClickArg) {
-    if (confirm(`¿Esta seguro de querer eliminar el evento '${clickInfo.event.title}'`)) {
-      clickInfo.event.remove();
+
+    // if (confirm(`¿Esta seguro de querer eliminar el evento '${clickInfo.event.title}'`)) {
+    //   clickInfo.event.remove();
       
-      this.calendario.deleteEvento(parseInt(clickInfo.event.id)).subscribe();
-    }
+    //   this.calendario.deleteEvento(parseInt(clickInfo.event.id)).subscribe();
+    // }
+    // this.formCreacion.nativeElement.modal('show')
+    $('#formCreacion').modal("show");
+    // console.log(this.formCreacion.nativeElement.modal('show'))
+    // this.showModal = true
   }
 
   handleEvents(events: EventApi[]) {
