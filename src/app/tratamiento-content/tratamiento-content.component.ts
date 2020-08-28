@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TratamientoService } from '../services/tratamiento.service';
 import { tratamientoObject } from '../Models/tratamiento_model';
+import { LesionService } from '../services/lesion.service';
 
 @Component({
   selector: 'app-tratamiento-content',
@@ -10,30 +11,30 @@ import { tratamientoObject } from '../Models/tratamiento_model';
 export class TratamientoContentComponent implements OnInit {
   tratamientos: any;
   nuevoTratamiento: tratamientoObject = new tratamientoObject();
-
-  lesionItems: Array<any> = [
-    { name: 'Melanoma', value: 1, defaultSelected: true },
-    { name: 'Vitiligo', value: 2 },
-    { name: 'Psoriasis', value: 3 },
-  ];
+  selected: tratamientoObject = null;
   selectedValue: string = '';
   listaTratamientos: any;
+  tipoLesiones: any;
 
-  constructor(public tratservice: TratamientoService) {
+  constructor(public tratservice: TratamientoService, public lesionService: LesionService) {
     this.getTratamientos();
+    this.getTipoLesiones();
   }
 
   ngOnInit(): void {
-    this.selectedValue = this.lesionItems.filter(
-      (a) => a.defaultSelected
-    )[0].value;
-    console.log(this.tratamientos);
-    itemToRemove: Number;
+    
   }
 
   public getTratamientos() {
     this.tratservice.getTratamientos().subscribe((tratamientos: any) => {
       this.listaTratamientos = tratamientos;
+    });
+  }
+
+  public getTipoLesiones() {
+    this.lesionService.getTipoLesiones().subscribe((tipos: any) => {
+      this.tipoLesiones = tipos;
+      console.log(tipos)
     });
   }
 
@@ -68,12 +69,14 @@ export class TratamientoContentComponent implements OnInit {
       this.tratservice
         .deleteTratamiento(parseInt(tratamiento.id))
         .subscribe(() => {
-          this.getTratamientos()
+          this.getTratamientos();
         });
     }
   }
 
   public assignTratamiento(trat: tratamientoObject) {
-    this.nuevoTratamiento = trat;
+    this.selected = trat;
+    Object.assign(this.nuevoTratamiento, trat);
+    console.log(this.nuevoTratamiento)
   }
 }

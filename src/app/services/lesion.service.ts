@@ -13,7 +13,12 @@ export class LesionService {
   public getLesiones() {
     return this.http.get("http://localhost:8080/lesiones/paciente");
   }
+  
   public getLesionesPorUsuario(usuarioid:number) {
     return this.http.get("http://localhost:8080/lesiones/paciente/"+usuarioid);
+  }
+
+  public getTipoLesiones() {
+    return this.http.get("http://localhost:8080/tipo_lesiones");
   }
 }
