@@ -1,29 +1,108 @@
-<div class='demo-app-main'>
-    <full-calendar
-      *ngIf='calendarVisible'
-      [options]='calendarOptions'
-    ></full-calendar>
+<div class="demo-app-main">
+  <full-calendar
+    *ngIf="calendarVisible"
+    [options]="calendarOptions"
+  ></full-calendar>
+</div>
+
+<div id="formCreacion" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Nuevo Evento</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body form-group">
+        <div>
+          Título:
+          <input
+            type="text"
+            name="event_title"
+            class="form-control"
+            [(ngModel)]="title"
+          />
+        </div>
+        <div>
+          Event Color :
+          <input
+            type="color"
+            name="favcolor"
+            class="form-control"
+            value="#ccc"
+            [(ngModel)]="color"
+          />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-default btn-raised"
+          data-dismiss="modal"
+        >
+          Cancel
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary btn-raised"
+          data-dismiss="modal"
+          (click)="addNewEvent()"
+        >
+          Save
+        </button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
   </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 
+<div
+  id="formEdit"
+  class="modal fade"
+  tabindex="-1"
+  role="dialog"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">{{ title }}</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body form-group">
+        <div>Date : {{ start | date: "dd/MM/yy" }}</div>
 
-  <div id="formCreacion" class="modal fade" tabindex="-1" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Nuevo Evento</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        </div>
-        <div class="modal-body form-group">
-          <div>Título:
-            <input type="text" name="event_title" class="form-control" [(ngModel)]="title">
-          </div> 
-          <div>Event Color :
-            <input type="color" name="favcolor" class="form-control" value="#ccc" [(ngModel)]="color">
-          </div>
-        </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default btn-raised" data-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary btn-raised" (click)="addNewEvent(title)">Save</button>
+          <button
+            type="button"
+            class="btn btn-default btn-raised"
+            data-dismiss="modal"
+          >
+            Close
+          </button>
+          <button
+            type="button"
+            (click)="deleteEvent()"
+            data-dismiss="modal"
+            class="btn btn-danger btn-raised"
+          >
+            Delete
+          </button>
         </div>
       </div>
       <!-- /.modal-content -->
@@ -31,3 +110,4 @@
     <!-- /.modal-dialog -->
   </div>
   <!-- /.modal -->
+</div>

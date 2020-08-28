@@ -6,10 +6,16 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class CalendarioService {
   addEvento(idPaciente: number, idDoctor: number, title: string, startStr: string, endStr: string) {
-    const httpOptions = {
-      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    
+    let data = {
+      id_paciente: idPaciente,
+      id_doctor: idDoctor,
+      titulo: title,
+      fecha_inicio: startStr,
+      fecha_fin: endStr
     }
-    return this.http.post("http://localhost:8080/agenda",JSON.stringify("{\"id_paciente\":"+idPaciente +",\"id_doctor\":"+ idDoctor+",\"titulo\":"+title+",\"fecha_inicio\":"+startStr+",\"fecha_fin\":"+ endStr+"}"),httpOptions);
+
+    return this.http.post("http://localhost:8080/agenda", data);
   }
   deleteEvento(id: number) {
     
