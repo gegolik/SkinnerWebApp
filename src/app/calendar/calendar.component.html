@@ -29,6 +29,12 @@
             [(ngModel)]="title"
           />
         </div>
+          <label for="usuario">Paciente</label>
+          <select [(ngModel)]="paciente" class="form-control">
+              <option *ngFor="let usuario of usuarios" [ngValue]="usuario">
+                  {{ usuario.apellido + " " + usuario.nombre }} 
+              </option>
+          </select>
         <div>
           Event Color :
           <input

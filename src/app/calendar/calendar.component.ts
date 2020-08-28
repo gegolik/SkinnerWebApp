@@ -10,6 +10,7 @@ import {
 import { INITIAL_EVENTS, createEventId } from './event-utils';
 import { EventInput } from '@fullcalendar/angular';
 import esLocale from '@fullcalendar/core/locales/es';
+import { UserService } from '../services/user.service';
 declare var $: any;
 
 @Component({
@@ -24,13 +25,22 @@ export class CalendarComponent {
   color: String;
   selectInfo: any;
   selected: any;
-  clickInfo: EventClickArg
-  start:any;
-  
-  constructor(public calendario: CalendarioService) {
+  clickInfo: EventClickArg;
+  start: any;
+  usuarios: any;
+  paciente:any;
+
+  constructor(
+    public calendario: CalendarioService,
+    public userService: UserService
+  ) {
     this.calendario.getCalendario().subscribe((calendario: any) => {
       this.respuesta = calendario;
     });
+
+    this.userService.getData().subscribe((usuarios: any) => {
+      this.usuarios = usuarios;
+    })
   }
 
   calendarVisible = true;
@@ -73,7 +83,7 @@ export class CalendarComponent {
     this.title = '';
     this.start = '';
     this.selected = selectInfo;
-    console.log(selectInfo)
+    console.log(selectInfo);
     $('#formCreacion').modal('show');
     // const title = prompt('Por favor añada titulo al evento');
 
@@ -97,7 +107,7 @@ export class CalendarComponent {
     // }
   }
 
-  deleteEvent(){
+  deleteEvent() {
     this.clickInfo.event.remove();
     this.calendario.deleteEvento(parseInt(this.clickInfo.event.id)).subscribe();
   }
@@ -107,8 +117,6 @@ export class CalendarComponent {
     calendarApi.unselect(); // clear date selection
 
     if (this.title) {
-      const paciente = 1;
-      if (paciente) {
         calendarApi.addEvent({
           id: createEventId(),
           title: this.title,
@@ -119,8 +127,10 @@ export class CalendarComponent {
         });
         this.calendario
           .addEvento(
-            1,
+            this.paciente.id,
             2,
+            this.paciente.nombre,
+            this.paciente.apellido,
             this.title.toString(),
             this.selected.startStr,
             this.selected.endStr
@@ -128,7 +138,6 @@ export class CalendarComponent {
           .subscribe((cosa: any) => {
             console.log(cosa);
           });
-      }
     }
   }
 
@@ -139,7 +148,7 @@ export class CalendarComponent {
     //   this.calendario.deleteEvento(parseInt(clickInfo.event.id)).subscribe();
     // }
     // this.formCreacion.nativeElement.modal('show')
-    
+
     this.title = clickInfo.event.title;
     this.clickInfo = clickInfo;
     this.start = clickInfo.event.start;
