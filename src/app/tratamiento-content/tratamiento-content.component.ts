@@ -38,19 +38,7 @@ export class TratamientoContentComponent implements OnInit {
     });
   }
 
-  public persistirTratamiento(trat: tratamientoObject) {
-    console.log('PERSISTIR');
-    const index = this.tratamientos.indexOf(trat);
-    if (index != -1) {
-      this.tratservice.deleteTratamiento(this.tratamientos);
-    }
-    this.tratservice
-      .addTratamiento(this.nuevoTratamiento)
-      .subscribe((response) => {
-        console.log(response);
-      });
-    this.limpiarTratamiento();
-  }
+  
   public agregarTratamiento(trat: tratamientoObject) {
     console.log(this.nuevoTratamiento);
     this.tratservice

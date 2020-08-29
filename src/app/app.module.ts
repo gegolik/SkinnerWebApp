@@ -29,6 +29,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ListadoLesionesComponent } from './listado-lesiones/listado-lesiones.component';
 import { HistorialLesionesComponent } from './historial-lesiones/historial-lesiones.component';
+import { AdministracionmedicosComponent } from './administracionmedicos/administracionmedicos.component';
 
 
 //MODELS
@@ -44,6 +45,8 @@ const rutas: Routes = [
   ,{ path: 'listado-lesiones/:id', component:ListadoLesionesComponent}
   ,{ path: 'historial-lesiones/:id', component:HistorialLesionesComponent}
   ,{ path: 'login', component: LoginComponent}
+  ,{ path: 'medicos', component: AdministracionmedicosComponent}
+
   //,{ path: 'pacientes', component:PacientesContentComponent}
   //,{ path: 'miperfil', component:PerfilContentComponent}
   //,{ path: 'configuracion', component:ConfiguracionContentComponent}
@@ -66,7 +69,8 @@ FullCalendarModule.registerPlugins([
     ListadoLesionesComponent,
     HistorialLesionesComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    AdministracionmedicosComponent,
   ],
   imports: [
     BrowserModule,

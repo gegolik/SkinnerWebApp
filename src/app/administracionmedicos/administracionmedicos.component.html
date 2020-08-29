@@ -1,0 +1,218 @@
+<!-- Boton disparador Modal Alta -->
+
+<div container class="col-12" class="btn-group">
+
+    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#altaMedico" (click)='limpiarMedico()'>
+        Alta Medico
+    </button>
+    <button [disabled]="!selected" type="button" class="btn btn-dark" data-toggle="modal" data-target="#modificarMedico">
+        Modificar Medico
+    </button>
+
+</div>
+
+<!--TABLA DE TRATAMIENTOS-->
+<div container>
+    <table class="table table-striped table-bordered table-sm">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Email</th>
+                <th>Activo</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let medico of listaMedicos">
+                <td>
+                    <!-- Boton de seleccion -->
+                    <div class="form-check">
+                        <input class="form-check-input position-static" type="radio" name="blankRadio" id="blankRadio1"
+                            value="option1" (click)=assignMedico(medico)>
+                    </div>
+                </td>
+                <td>{{medico.nombre}}</td>
+                <td>{{medico.apellido}}</td>
+                <td>{{medico.email}}</td>
+                <td>{{medico.activo}}</td>
+                <td>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+<!--POP UPS-->
+<!-- Modal Alta-->
+<div class="modal fade" id="altaMedico" tabindex="-1" role="dialog" aria-labelledby="altaMedico" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="altaMedico">Medico</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="usr">Nombre</label>
+                            <input type="text" minlength="1" maxlength="65" [(ngModel)]="nuevoMedico.nombre"
+                                class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="usr">Apellido</label>
+                            <input type="text" minlength="1" maxlength="65" [(ngModel)]="nuevoMedico.apellido"
+                                class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="usr">Telefono</label>
+                            <input type="text" minlength="1" maxlength="65" [(ngModel)]="nuevoMedico.telefono"
+                                class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="usr">Direccion</label>
+                            <input type="text" minlength="1" maxlength="65" [(ngModel)]="nuevoMedico.direccion"
+                                class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="usr">email</label>
+                            <input type="text" minlength="1" maxlength="65" [(ngModel)]="nuevoMedico.email"
+                                class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <!--input type="text" minlength="1" maxlength="65" [(ngModel)]="nuevoMedico.email"
+                                class="form-control"-->
+                            <input type="checkbox" name="status" [(ngModel)]="nuevoMedico.activo"  /> Activo
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
+                <!-- Boton disparador Modal confirmacion -->
+                <button type="button" (click)="agregarMedico(nuevoMedico)" class="btn btn-primary" data-toggle="modal"
+                    data-target=".bd-example-modal-sm" data-dismiss="modal">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Alta-->
+<div class="modal fade" id="modificarMedico" tabindex="-1" role="dialog" aria-labelledby="modificarMedico" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modificarMedico">Medico</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="usr">Nombre</label>
+                            <input type="text" minlength="1" maxlength="65" [(ngModel)]="nuevoMedico.nombre"
+                                class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="usr">Apellido</label>
+                            <input type="text" minlength="1" maxlength="65" [(ngModel)]="nuevoMedico.apellido"
+                                class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="usr">Telefono</label>
+                            <input type="text" minlength="1" maxlength="65" [(ngModel)]="nuevoMedico.telefono"
+                                class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="usr">Direccion</label>
+                            <input type="text" minlength="1" maxlength="65" [(ngModel)]="nuevoMedico.direccion"
+                                class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="usr">email</label>
+                            <input type="text" minlength="1" maxlength="65" [(ngModel)]="nuevoMedico.email"
+                                class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <!--input type="text" minlength="1" maxlength="65" [(ngModel)]="nuevoMedico.email"
+                                class="form-control"-->
+                            <input type="checkbox" name="status" [(ngModel)]="nuevoMedico.activo"  /> Activo
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
+                <!-- Boton disparador Modal confirmacion -->
+                <button type="button" (click)="modificarMedico(nuevoMedico)" class="btn btn-primary" data-toggle="modal"
+                     data-dismiss="modal">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Confirmacion de Alta -->
+<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h6>El medico se dado de alta exitosamente</h6>
+            </div>
+        </div>
+    </div>
+</div>
