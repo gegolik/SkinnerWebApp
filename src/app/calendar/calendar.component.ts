@@ -119,7 +119,7 @@ export class CalendarComponent {
     if (this.title) {
         calendarApi.addEvent({
           id: createEventId(),
-          title: this.title,
+          title: this.title+ "- "+this.paciente.nombre+ " "+this.paciente.apellido,
           start: this.selected.startStr,
           end: this.selected.endStr,
           allDay: this.selected.allDay,
@@ -131,7 +131,7 @@ export class CalendarComponent {
             2,
             this.paciente.nombre,
             this.paciente.apellido,
-            this.title.toString(),
+            this.title.toString() + "- "+this.paciente.nombre+ " "+this.paciente.apellido,
             this.selected.startStr,
             this.selected.endStr
           )

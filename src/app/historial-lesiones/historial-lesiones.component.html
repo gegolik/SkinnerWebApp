@@ -1,15 +1,19 @@
-<table *ngFor="let historial of historialLesion"class="table table-bordered" > 
-    <tr>
-    <td colspan="2" class="col-sm-2 col-xs-2" style="text-align: center;"><img class='h-20' src="data:image/png;base64,{{historial.imagen}}"></td></tr>
-    <tr>
-        <td td class="col-xl-2 col-xl-2" style="text-align: center;vertical-align: middle;width:50%">
-       {{historial.descripcion}} 
-        </td>
-        <td class="col-xl-2 col-xl-2" style="text-align: center;vertical-align: middle;width:50%">
-            Fecha de la foto: {{historial.fecha| date:"MM/dd/yyyy 'a las' HH:mm"}} 
-        </td>
 
-    </tr>
-    <tr>
-        <td colspan="2" class="col-sm-2 col-xs-2"> Resultados del analisis: {{historial.analisis}} </td></tr>
-</table>
+<div class="container py-5">
+
+        <div class="row">
+            <div class="col-lg-7 mx-auto">
+                
+                <!-- Timeline -->
+                <ul class="timeline" *ngFor="let historial of historialLesion">
+                    <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
+                        <div class="timeline-arrow"></div>
+                        <h2 class="h5 mb-0"><img class='h-20' src="data:image/png;base64,{{historial.imagen}}"></h2><span class="small text-gray"><i class="fa fa-clock-o mr-1"></i>Fecha de la foto: {{historial.fecha| date:"dd/MM/yyyy 'a las' HH:mm"}} </span>
+                        <p class="text-small mt-2 font-weight-light">{{historial.descripcion}}</p>
+                        <p class="text-small mt-2 font-weight-light">Resultados del analisis: {{historial.analisis}}</p>
+                    </li>
+                </ul><!-- End -->
+
+            </div>
+        </div>
+    </div>
