@@ -29,9 +29,9 @@
               <li class="nav-item active">
                       <a class="nav-link" href="#" data-toggle="modal" data-target="#formLogin">Login <span class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item active">
+                    <!--li class="nav-item active">
                       <a class="nav-link" (click)="logout()" href="#">Logout</a>
-                    </li>
+                    </li-->
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                   aria-haspopup="true" aria-expanded="false">
@@ -68,7 +68,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="row">
+                <div class="row" [hidden]="olvidarContrasenia">
                     <div class="col-12">
                         <div class="form-group">
                             <label for="usr">Email</label>
@@ -77,7 +77,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" [hidden]="olvidarContrasenia">
                     <div class="col-12">
                         <div class="form-group">
                             <label for="usr">Password</label>
@@ -86,13 +86,26 @@
                         </div>
                     </div>
                 </div>
+                <div class="row" [hidden]="!olvidarContrasenia">
+                  <div class="col-12">
+                      <div class="form-group">
+                          <label for="usr">Por favor introduce tu email</label>
+                          <input type="text"
+                          class="form-control" id="username" name="username" [(ngModel)]="credentials.username"/>
+                      </div>
+                  </div>
+              </div>
+                <div class="row">
+                  <a class="col-12" [routerLink]="" (click)="olvidarContrasenia=true" [hidden]="olvidarContrasenia">¿Olvidaste tu contraseña?</a>
+              </div>
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" [hidden]="olvidarContrasenia">Salir</button>
                 <!-- Boton disparador Modal confirmacion -->
-                <button type="button" (click)="login()" class="btn btn-primary" data-dismiss="modal">Login</button>
-            </div>
+                <button type="button" (click)="login()" class="btn btn-primary" data-dismiss="modal" [hidden]="olvidarContrasenia">Login</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" [hidden]="!olvidarContrasenia">Enviar mail de confirmacion</button>
+              </div>
         </div>
     </div>
 </div>

@@ -14,7 +14,7 @@ export class AppComponent {  respuesta=[]
   http: any;
   private cookieValue: string;
   credentials = {username: '', password: ''};
-
+  olvidarContrasenia=false;
   constructor(private app: AppserviceService,public userService: UserService, public appService:AppserviceService,private route:ActivatedRoute,private router: Router) {
   this.userService.getData().subscribe((users: any)=>{this.respuesta=users});
   var id=this.route.snapshot.params.id;

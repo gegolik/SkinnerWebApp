@@ -31,7 +31,6 @@ import { ListadoLesionesComponent } from './listado-lesiones/listado-lesiones.co
 import { HistorialLesionesComponent } from './historial-lesiones/historial-lesiones.component';
 import { AdministracionmedicosComponent } from './administracionmedicos/administracionmedicos.component';
 
-
 //MODELS
 //import { tratamientoObject } from './Models/tratamiento_model';
 
@@ -70,7 +69,7 @@ FullCalendarModule.registerPlugins([
     HistorialLesionesComponent,
     HomeComponent,
     LoginComponent,
-    AdministracionmedicosComponent,
+    AdministracionmedicosComponent
   ],
   imports: [
     BrowserModule,

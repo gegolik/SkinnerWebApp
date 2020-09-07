@@ -15,8 +15,7 @@ export class UserService {
 
   public getData() {
 
-
-    return this.http.get("http://localhost:8080/usuarios");
+    return this.http.get("http://localhost:8080/usuarios/rol/2");
   }
 
   public getRespuesta(){

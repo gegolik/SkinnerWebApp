@@ -1,4 +1,6 @@
-
+<div id="page-content-wrapper" [hidden]="authenticated()">
+  <p>Conectate primero para ver esta seccion</p>
+</div>
   <div id="page-content-wrapper" [hidden]="!authenticated()">
     <div container>
       <table class="table table-striped table-bordered table-sm">
@@ -25,6 +27,3 @@
   </div>
 
 
-  <div [hidden]="authenticated()">
-    <p>Conectate primero para ver esta seccion</p>
-  </div>

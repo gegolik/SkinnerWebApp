@@ -68,7 +68,7 @@
                         <div class="form-group">
                             <label for="usr">Tipo de Lesión</label>
                             <select [(ngModel)]="nuevoTratamiento.tipoLesion" class="form-control">
-                                <option *ngFor="let lesionItem of tipoLesiones" [ngValue]="lesionItem.descripcion">
+                                <option *ngFor="let lesionItem of tipoLesiones" [ngValue]="lesionItem.id">
                                     {{ lesionItem.descripcion }}
                                 </option>
                             </select>

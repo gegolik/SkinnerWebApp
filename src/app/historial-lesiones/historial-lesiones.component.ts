@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HistoriaLesionesService } from '../services/historia-lesiones.service';
-
+import { TratamientoService } from '../services/tratamiento.service';
 @Component({
   selector: 'app-historial-lesiones',
   templateUrl: './historial-lesiones.component.html',
@@ -15,6 +15,8 @@ export class HistorialLesionesComponent implements OnInit {
   expandEnabled: boolean = true;
   contentAnimation: boolean = true;
   dotAnimation: boolean = true;
+  nuevoMedico:any
+  historial:any;
   side = 'left';
   entries = [
     {
@@ -53,13 +55,41 @@ export class HistorialLesionesComponent implements OnInit {
   toggleSide() {
     this.side = this.side === 'left' ? 'right' : 'left';
   }
-historialLesion : any
-  constructor(public historiaLesionesService: HistoriaLesionesService,private route:ActivatedRoute) {
-    var id=this.route.snapshot.params.id;
-    this.historiaLesionesService.getHistorialLesionesPorId(id).subscribe((lesiones: any)=>{this.historialLesion=lesiones});
 
-   }
+ /* public modificarHistorialComentarios(hist: any) {
+   
+    this.historiaLesionesService.modificarLesiones(this.nuevoMedico).subscribe((response) => {
+        this.getListaMedicos();
+      });
+  }
+  */
+historialLesion : any;
+listaTratamientosAsignados:any;
+listaTratamientos:any;
+tratamientoAAsignar:any;
+id:any;
+  constructor(public historiaLesionesService: HistoriaLesionesService,private route:ActivatedRoute,public tratservice:TratamientoService) {
+    this.id=this.route.snapshot.params.id;
+    this.historiaLesionesService.getHistorialLesionesPorId(this.id).subscribe((lesiones: any)=>{this.historialLesion=lesiones});
+    this.historiaLesionesService.getTratamientosLesiones(this.id).subscribe((tratamientosasignados: any)=>{this.listaTratamientosAsignados=tratamientosasignados})
+    this.tratservice.getTratamientos().subscribe((tratamientos: any) => {this.listaTratamientos = tratamientos});
+  }
 
+  asignarTratamiento(tratamientoAAsignar:any){
+
+      console.log(this.tratamientoAAsignar);
+      this.historiaLesionesService.asignarTratamientos(this.tratamientoAAsignar,this.id).subscribe((response) => {this.actualizarTratamientos(); });
+    
+  }
+
+  actualizarTratamientos(){
+    this.historiaLesionesService.getTratamientosLesiones(this.id).subscribe((tratamientosasignados: any)=>{this.listaTratamientosAsignados=tratamientosasignados})
+  }
+
+  borrarTratamiento(tratamientoAAsignar:any){
+    this.historiaLesionesService.borrarAsignacionTratamiento(tratamientoAAsignar).subscribe(()=>{this.actualizarTratamientos();})
+
+  }
   ngOnInit(): void {
   }
 

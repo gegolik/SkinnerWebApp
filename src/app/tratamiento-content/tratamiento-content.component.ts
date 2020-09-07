@@ -15,7 +15,6 @@ export class TratamientoContentComponent implements OnInit {
   selectedValue: string = '';
   listaTratamientos: any;
   tipoLesiones: any;
-
   constructor(public tratservice: TratamientoService, public lesionService: LesionService) {
     this.getTratamientos();
     this.getTipoLesiones();

@@ -4,16 +4,20 @@
             <tr>
                 <th style="text-align: center">Descripcion</th>
                 <th style="text-align: center">Vista previa</th>
-                <th></th>
+                <th style="text-align: center">Resultados del analisis</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let lesiones of respuesta">
                 <td class="col-sm-4 col-xs-4" style="text-align: center;vertical-align: middle;">
-               {{lesiones.descripcion}} 
+               {{lesiones.descripcion}}
                 </td>
                 <td style="text-align: center"> <a [routerLink]="['/historial-lesiones',lesiones.id]"><img class='h-25' src="{{getUrl(lesiones.imagen)}}"></a></td>
+                <td class="col-sm-4 col-xs-4" style="text-align: center;vertical-align: middle;">
+                   {{lesiones.analisis}}
+                </td>
             </tr>
+            
         </tbody>
     </table>
 </div>
