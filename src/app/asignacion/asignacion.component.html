@@ -1,0 +1,20 @@
+<div class="flex-container">
+    <div *ngIf="!respuesta||respuesta.length==0">No tenes asignaciones pendientes</div>
+<div *ngFor="let asignacion of respuesta"class="card" style="width: 18rem;">
+    <img class="card-img-top" src="data:image/png;base64,{{asignacion.imagen}}">
+    <div class="card-body">
+      <h5 class="card-title">Solicitud del paciente: </h5>
+      <p class="card-text">{{asignacion.nombre}} {{asignacion.apellido}}</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Fecha de solicitud: {{asignacion.fecha_creacion| date:"dd/MM/yyyy 'a las' HH:mm"}}</li>
+      <li class="list-group-item">Seccion: {{asignacion.seccion}}</li>
+      <li class="list-group-item">Ubicacion: {{asignacion.ubicacion}}</li>
+      <li class="list-group-item">Analisis: {{asignacion.analisis}}</li>
+    </ul>
+    <div class="card-body">
+        <button type="button" (click)="updateAsignacion(true, asignacion.id)" style="margin-right: 10px" class="btn btn-success">Aprobar</button>
+        <button type="button" (click)="updateAsignacion(false, asignacion.id)" style="margin-left: 10px" class="btn btn-danger">Rechazar</button>
+    </div>
+  </div>
+</div>

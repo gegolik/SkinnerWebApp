@@ -8,7 +8,7 @@ import {CookieService} from 'ngx-cookie-service';
 export class AppserviceService {
 
   authenticated = this.estoyAutenticado();
-private cookieValue:string;
+private cookieValue:boolean;
 
   constructor(private http: HttpClient,private cookieService:CookieService) { }
   authenticate(credentials, callback) {
@@ -22,9 +22,9 @@ private cookieValue:string;
     } : {});
 
     this.http.post('http://localhost:8080/login',data,config).subscribe(response => {
-        if (response['nombre']) {
+        if (response['id']) {
             this.authenticated = true;
-            this.cookieService.set('autenticado','1');
+            this.cookieService.set('autenticado',response['id']);
         } else {
             this.authenticated = false;
         }
@@ -36,8 +36,8 @@ public   logOut() {
   this.cookieService.delete('autenticado');
 }
 public estoyAutenticado(){
-  this.cookieValue=this.cookieService.get('autenticado');
-if(this.cookieValue=='1'){
+  this.cookieValue=this.cookieService.check('autenticado');
+if(this.cookieValue){
   return true;
 }
 
@@ -46,6 +46,6 @@ if(this.cookieValue=='1'){
 }
 
   public getNotificaciones(dummyid:number) {
-    return this.http.get("http://localhost:8080//usuarios/notificaciones/"+dummyid);
+    return this.http.get("http://localhost:8080/asignaciones/count/"+dummyid);
   }
 }

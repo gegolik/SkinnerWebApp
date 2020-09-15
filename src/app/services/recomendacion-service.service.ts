@@ -15,7 +15,7 @@ export class RecomendacionServiceService {
 
   addRecomendacion(trat: recomendacionObject) {
     let data = {
-      tipoLesion: trat.tipoLesion,
+      id_tipo: trat.tipoLesion,
       titulo: trat.titulo,
       descripcion: trat.descripcion,
     };

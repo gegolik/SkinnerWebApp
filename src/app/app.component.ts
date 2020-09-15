@@ -3,6 +3,7 @@ import * as $ from 'jquery';
 import { UserService } from './services/user.service';
 import { AppserviceService } from './services/appservice.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-root',
@@ -15,11 +16,13 @@ export class AppComponent {  respuesta=[]
   private cookieValue: string;
   credentials = {username: '', password: ''};
   olvidarContrasenia=false;
-  constructor(private app: AppserviceService,public userService: UserService, public appService:AppserviceService,private route:ActivatedRoute,private router: Router) {
+  constructor(private app: AppserviceService,public cookieService:CookieService,public userService: UserService, public appService:AppserviceService,private route:ActivatedRoute,private router: Router) {
   this.userService.getData().subscribe((users: any)=>{this.respuesta=users});
   var id=this.route.snapshot.params.id;
-  this.appService.getNotificaciones(6).subscribe((notificaciones: any)=>{this.cantNotificaciones=notificaciones});
-  this.appService.estoyAutenticado();
+  
+  if(this.appService.estoyAutenticado()){
+    setInterval(()=>{ this.appService.getNotificaciones(parseInt(this.cookieService.get('autenticado'))).subscribe((notificaciones: any)=>{this.cantNotificaciones=notificaciones;console.log("ENTRE")});},5000)
+  }
   }
   logout() {
     this.appService.authenticated = false;
