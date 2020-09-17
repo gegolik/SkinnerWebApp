@@ -1,0 +1,53 @@
+<div class="container" style="max-width: 400px;">
+<form>
+    <h5>Modifica tu perfil</h5>
+    <div class="form-group">
+      <label for="nombre">Nombre</label>
+      <input type="text" class="form-control" id="nombre" placeholder="Nombre" [(ngModel)]="user.nombre" [ngModelOptions]="{standalone: true}">
+    </div>
+    <div class="form-group">
+        <label for="apellido">Apellido</label>
+        <input type="text" class="form-control" id="apellido" placeholder="Apellido" [(ngModel)]="user.apellido" [ngModelOptions]="{standalone: true}">
+      </div>
+      <div class="form-group">
+        <label for="telefono">Telefono</label>
+        <input type="text" class="form-control" id="telefono" placeholder="Telefono" [(ngModel)]="user.telefono" [ngModelOptions]="{standalone: true}">
+      </div>
+      <div class="form-group">
+        <label for="direccion">Direccion</label>
+        <input type="text" class="form-control" id="direccion" placeholder="Direccion" [(ngModel)]="user.direccion" [ngModelOptions]="{standalone: true}">
+      </div>
+      <button type="button" (click)="guardarPerfil(user)" class="btn btn-success">Guardar</button>
+      <div *ngIf="cambiosCorrectos==true" class="alert-success" role="alert">
+        <strong>Datos cambiados correctamente</strong>
+    </div>
+      <br>
+      <hr class="style13">
+      <br>
+      <h5>¿Querés cambiar tu contraseña?</h5>
+      <div class="form-group">
+        <label for="passwordVieja">Contraseña actual</label>
+        <input type="password" class="form-control" id="passwordVieja" placeholder="Password" [(ngModel)]="conjuntoContrasenia.passwordVieja" name="passwordVieja">
+      </div>
+      <div class="form-group">
+        <label for="passwordNueva">Nueva contraseña</label>
+        <input type="password" class="form-control" id="passwordNueva" placeholder="Nueva password"  [(ngModel)]="conjuntoContrasenia.passwordNueva" name="passwordNueva">
+      </div>
+      <div class="form-group">
+        <label for="passwordNuevaRepetida">Vuelve a introducir tu contraseña</label>
+        <input type="password" class="form-control" id="passwordNuevaRepetida" placeholder="Repetí tu password" [(ngModel)]="conjuntoContrasenia.passwordNuevaRepetida" name="passwordNuevaRepetida">
+      </div>
+      <div *ngIf="incorrecta==true" class="alert-danger" role="alert">
+        <strong>Las contraseñas no coinciden. Intente de nuevo</strong>
+    </div>
+    <div *ngIf="passwordincorrecta==true&&passwordCorrecta==false" class="alert-danger" role="alert">
+        <strong>Contraseña actual incorrecta. Intente de nuevo</strong>
+    </div>
+    <div *ngIf="passwordCorrecta==true &&passwordincorrecta==false" class="alert-success" role="alert">
+        <strong>Contraseña cambiada correctamente</strong>
+    </div>
+    <div>
+        <button type="button" (click)="chequearcontrasenia(conjuntoContrasenia)" class="btn btn-success">Cambiar contraseña</button>
+    </div>
+    </form>
+</div>
