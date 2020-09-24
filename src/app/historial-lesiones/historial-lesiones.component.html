@@ -13,6 +13,8 @@
                         <p class="text-small mt-2 font-weight-light">{{historial.descripcion}}</p>
                         <!--p class="text-small mt-2 font-weight-light">Resultados del analisis: {{historial.analisis}}</p-->
                         <button type="button" class="btn btn-success btn-block">Comentario</button>
+                        <button type="button"  class="btn btn-success btn-block" data-toggle="modal" data-target="#imagenesAdicionales" (click)='getAdicionales(historial.id)'>Ver Adicionales</button>
+            
                     </li>
                 </ul><!-- End -->
 
@@ -62,7 +64,45 @@
         
     </div>
 
-    
+    <div class="modal fade" id="imagenesAdicionales" tabindex="-1" role="dialog" aria-labelledby="imagenesAdicionalesLabel"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="imagenesAdicionalesLabel">Imagenes Adicionales</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group" *ngFor="let adicionales of listaAdicionales;let i = index">
+                        <h3 class="text-center">Imagen extraida N° {{i}}</h3>
+                        <div class="text-center" ><img style='max-width:200px ;' src="data:image/png;base64,{{adicionales.recortada}}"></div>
+                        <br/>
+                        <h3 class="text-center">Bordes N° {{i}}</h3>
+                        <div class="text-center" ><img style='max-width:200px ;' src="data:image/png;base64,{{adicionales.borde}}"></div>
+                        <br/>
+                        <h3 class="text-center">Gama de colores N° {{i}}</h3>
+                        <div class="text-center" ><img style='max-width:200px ;' src="data:image/png;base64,{{adicionales.color}}"></div>
+                        <br/>
+                        <hr class="style13"/>
+                        <br/>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
+            <!--Boton disparador Modal confirmacion-->
+            <button type="button" (click)="asignarTratamiento(tratamientoAAsignar)" class="btn btn-primary"
+                data-dismiss="modal">Guardar</button>
+        </div>
+    </div>
+</div>
+</div>
 <!--POP UPS-->
 <!-- Modal Alta-->
 <div class="modal fade" id="altaTratamiento" tabindex="-1" role="dialog" aria-labelledby="altaTratamientoLabel"

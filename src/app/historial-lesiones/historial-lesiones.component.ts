@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HistoriaLesionesService } from '../services/historia-lesiones.service';
 import { TratamientoService } from '../services/tratamiento.service';
+import { AdicionalesService } from '../services/adicionales.service'
 @Component({
   selector: 'app-historial-lesiones',
   templateUrl: './historial-lesiones.component.html',
@@ -18,6 +19,7 @@ export class HistorialLesionesComponent implements OnInit {
   nuevoMedico:any
   historial:any;
   side = 'left';
+  hide = false;
   entries = [
     {
       header: 'header',
@@ -65,10 +67,12 @@ export class HistorialLesionesComponent implements OnInit {
   */
 historialLesion : any;
 listaTratamientosAsignados:any;
+listaAdicionales:any;
 listaTratamientos:any;
 tratamientoAAsignar:any;
 id:any;
-  constructor(public historiaLesionesService: HistoriaLesionesService,private route:ActivatedRoute,public tratservice:TratamientoService) {
+idLesion:any;
+  constructor(public historiaLesionesService: HistoriaLesionesService,public adicionalesService: AdicionalesService, private route:ActivatedRoute,public tratservice:TratamientoService) {
     this.id=this.route.snapshot.params.id;
     this.historiaLesionesService.getHistorialLesionesPorId(this.id).subscribe((lesiones: any)=>{this.historialLesion=lesiones});
     this.historiaLesionesService.getTratamientosLesiones(this.id).subscribe((tratamientosasignados: any)=>{this.listaTratamientosAsignados=tratamientosasignados})
@@ -88,6 +92,15 @@ id:any;
 
   borrarTratamiento(tratamientoAAsignar:any){
     this.historiaLesionesService.borrarAsignacionTratamiento(tratamientoAAsignar).subscribe(()=>{this.actualizarTratamientos();})
+
+  }
+
+    getAdicionales(idLesion){
+    this.adicionalesService.getAdicionales(idLesion).subscribe((adicionales: any)=>{this.listaAdicionales=adicionales})
+  }
+
+    borrarAdicionales(idLesion:any){
+    this.adicionalesService.deleteAdicionales(this.idLesion).subscribe(()=>{})
 
   }
   ngOnInit(): void {
