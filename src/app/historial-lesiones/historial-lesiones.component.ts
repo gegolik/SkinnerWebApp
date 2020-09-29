@@ -1,17 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HistoriaLesionesService } from '../services/historia-lesiones.service';
 import { TratamientoService } from '../services/tratamiento.service';
 import { AdicionalesService } from '../services/adicionales.service';
 import { MensajeService } from '../services/mensaje.service';
 import { CookieService } from 'ngx-cookie-service';
-
+import {LesionService} from '../services/lesion.service';
+declare var $: any;
 @Component({
   selector: 'app-historial-lesiones',
   templateUrl: './historial-lesiones.component.html',
   styleUrls: ['./historial-lesiones.component.css']
 })
 export class HistorialLesionesComponent implements OnInit {
+  @ViewChild('ventanaChat') private myScrollContainer: ElementRef;
   alternate: boolean = true;
   toggle: boolean = true;
   color: boolean = false;
@@ -77,13 +79,18 @@ listaMensajes:any;
 id:any;
 idLesion:any;
 idDoctor:any;
-  constructor(public mensajeSevice:MensajeService, public historiaLesionesService: HistoriaLesionesService,public adicionalesService: AdicionalesService, private route:ActivatedRoute,public tratservice:TratamientoService,public cookieService:CookieService) {
+listaUsuarios:any;
+mensajeAEnviar:any;
+  constructor(public lesionService:LesionService,public mensajeSevice:MensajeService, public historiaLesionesService: HistoriaLesionesService,public adicionalesService: AdicionalesService, private route:ActivatedRoute,public tratservice:TratamientoService,public cookieService:CookieService) {
     this.id=this.route.snapshot.params.id;
     this.historiaLesionesService.getHistorialLesionesPorId(this.id).subscribe((lesiones: any)=>{this.historialLesion=lesiones});
     this.historiaLesionesService.getTratamientosLesiones(this.id).subscribe((tratamientosasignados: any)=>{this.listaTratamientosAsignados=tratamientosasignados})
     this.tratservice.getTratamientos().subscribe((tratamientos: any) => {this.listaTratamientos = tratamientos});
-    this.mensajeSevice.getMensajes(this.id).subscribe((mensajes: any) => {this.listaMensajes = mensajes});
+    this.mensajeSevice.getMensajes(this.id).subscribe((mensajes: any) => {this.listaMensajes = mensajes; this.scrollToBottom();});
+    this.lesionService.getUsuariosPorLesionId(this.id).subscribe((usuarios: any) => {this.listaUsuarios = usuarios});
     this.idDoctor=parseInt(this.cookieService.get('autenticado'));
+
+    
   }
 
   asignarTratamiento(tratamientoAAsignar:any){
@@ -101,6 +108,11 @@ idDoctor:any;
     this.historiaLesionesService.borrarAsignacionTratamiento(tratamientoAAsignar).subscribe(()=>{this.actualizarTratamientos();})
 
   }
+  setMensaje(mensaje:any){
+
+    this.mensajeSevice.createMensaje(mensaje,this.idDoctor,this.listaUsuarios[0].id_paciente,parseInt(this.id)).subscribe((mensajes: any)=>{this.mensajeAEnviar="";     this.mensajeSevice.getMensajes(this.id).subscribe((mensajes: any) => {this.listaMensajes = mensajes; this.scrollToBottom();});
+  })
+  }
 
     getAdicionales(idLesion){
     this.adicionalesService.getAdicionales(idLesion).subscribe((adicionales: any)=>{this.listaAdicionales=adicionales})
@@ -108,9 +120,17 @@ idDoctor:any;
 
     borrarAdicionales(idLesion:any){
     this.adicionalesService.deleteAdicionales(this.idLesion).subscribe(()=>{})
-
   }
   ngOnInit(): void {
+    this.scrollToBottom();
   }
+  ngAfterViewChecked() {        
+    this.scrollToBottom();        
+} 
 
+scrollToBottom(): void {
+  try {
+      this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+  } catch(err) { }                 
+}
 }

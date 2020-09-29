@@ -64,7 +64,7 @@
                         <div class="col">
                             <div class="card">
                                 <div class="card-header">Chat</div>
-                                <div class="card-body height3">
+                                <div #ventanaChat class="card-body height3"  style="height:400px;overflow: auto">
                                     <ul class="chat-list">
                                         <li *ngFor="let mensaje of listaMensajes" [ngClass]="(mensaje.id_origen_usuario==idDoctor)?'in':'out'">
                                             <div class="chat-img">
@@ -81,9 +81,9 @@
                                     </ul>
                                     <div class="panel-footer">
                                         <div class="input-group">
-                                            <input id="btn-input" type="text" class="form-control input-sm" placeholder="Escribe tu mensaje..." />
+                                            <input id="btn-input" type="text" class="form-control input-sm" placeholder="Escribe tu mensaje..." [(ngModel)]="mensajeAEnviar" />
                                             
-                                                <button class="btn btn-warning btn-sm" id="btn-chat">
+                                                <button (click)="setMensaje(mensajeAEnviar)" class="btn btn-warning btn-sm" id="btn-chat">
                                                     Send</button>
                                             
                                         </div>
