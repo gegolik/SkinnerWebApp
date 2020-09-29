@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HistoriaLesionesService } from '../services/historia-lesiones.service';
 import { TratamientoService } from '../services/tratamiento.service';
-import { AdicionalesService } from '../services/adicionales.service'
+import { AdicionalesService } from '../services/adicionales.service';
+import { MensajeService } from '../services/mensaje.service';
+import { CookieService } from 'ngx-cookie-service';
+
 @Component({
   selector: 'app-historial-lesiones',
   templateUrl: './historial-lesiones.component.html',
@@ -70,13 +73,17 @@ listaTratamientosAsignados:any;
 listaAdicionales:any;
 listaTratamientos:any;
 tratamientoAAsignar:any;
+listaMensajes:any;
 id:any;
 idLesion:any;
-  constructor(public historiaLesionesService: HistoriaLesionesService,public adicionalesService: AdicionalesService, private route:ActivatedRoute,public tratservice:TratamientoService) {
+idDoctor:any;
+  constructor(public mensajeSevice:MensajeService, public historiaLesionesService: HistoriaLesionesService,public adicionalesService: AdicionalesService, private route:ActivatedRoute,public tratservice:TratamientoService,public cookieService:CookieService) {
     this.id=this.route.snapshot.params.id;
     this.historiaLesionesService.getHistorialLesionesPorId(this.id).subscribe((lesiones: any)=>{this.historialLesion=lesiones});
     this.historiaLesionesService.getTratamientosLesiones(this.id).subscribe((tratamientosasignados: any)=>{this.listaTratamientosAsignados=tratamientosasignados})
     this.tratservice.getTratamientos().subscribe((tratamientos: any) => {this.listaTratamientos = tratamientos});
+    this.mensajeSevice.getMensajes(this.id).subscribe((mensajes: any) => {this.listaMensajes = mensajes});
+    this.idDoctor=parseInt(this.cookieService.get('autenticado'));
   }
 
   asignarTratamiento(tratamientoAAsignar:any){

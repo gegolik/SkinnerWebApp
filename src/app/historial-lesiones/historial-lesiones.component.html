@@ -59,7 +59,44 @@
                         
                     </tbody>
                 </table>
+                <div class="container content">
+                    <div class="row">
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-header">Chat</div>
+                                <div class="card-body height3">
+                                    <ul class="chat-list">
+                                        <li *ngFor="let mensaje of listaMensajes" [ngClass]="(mensaje.id_origen_usuario==idDoctor)?'in':'out'">
+                                            <div class="chat-img">
+                                                <img alt="Avtar" src="../../assets/doctor.png">
+                                            </div>
+                                            <div class="chat-body">
+                                                <div class="chat-message">
+                                                    <h5>{{mensaje.nombre_origen+" "+mensaje.apellido_origen}}</h5>
+                                                    <p>{{mensaje.mensaje}}</p>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                    <div class="panel-footer">
+                                        <div class="input-group">
+                                            <input id="btn-input" type="text" class="form-control input-sm" placeholder="Escribe tu mensaje..." />
+                                            
+                                                <button class="btn btn-warning btn-sm" id="btn-chat">
+                                                    Send</button>
+                                            
+                                        </div>
+                                    </div>                      
+   
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
               </div>
+              
         </div>
         
     </div>
