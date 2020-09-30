@@ -75,10 +75,13 @@ listaTratamientosAsignados:any;
 listaAdicionales:any;
 listaTratamientos:any;
 tratamientoAAsignar:any;
+lesionAAsignar:any;
 listaMensajes:any;
 id:any;
 idLesion:any;
 idDoctor:any;
+listaLesiones:any;
+listaTipoLesiones:any;
 listaUsuarios:any;
 mensajeAEnviar:any;
   constructor(public lesionService:LesionService,public mensajeSevice:MensajeService, public historiaLesionesService: HistoriaLesionesService,public adicionalesService: AdicionalesService, private route:ActivatedRoute,public tratservice:TratamientoService,public cookieService:CookieService) {
@@ -88,7 +91,9 @@ mensajeAEnviar:any;
     this.tratservice.getTratamientos().subscribe((tratamientos: any) => {this.listaTratamientos = tratamientos});
     this.mensajeSevice.getMensajes(this.id).subscribe((mensajes: any) => {this.listaMensajes = mensajes; this.scrollToBottom();});
     this.lesionService.getUsuariosPorLesionId(this.id).subscribe((usuarios: any) => {this.listaUsuarios = usuarios});
+    this.lesionService.getLesionPorId(this.id).subscribe((lesion: any) => {this.listaLesiones = lesion});
     this.idDoctor=parseInt(this.cookieService.get('autenticado'));
+    this.lesionService.getTipoLesiones().subscribe((tipoLesiones: any) => {this.listaTipoLesiones = tipoLesiones});
 
     
   }
@@ -115,11 +120,15 @@ mensajeAEnviar:any;
   }
 
     getAdicionales(idLesion){
-    this.adicionalesService.getAdicionales(idLesion).subscribe((adicionales: any)=>{this.listaAdicionales=adicionales})
+    this.adicionalesService.getAdicionales(idLesion).subscribe((adicionales: any)=>{this.listaAdicionales=adicionales;this.idLesion=idLesion})
   }
 
-    borrarAdicionales(idLesion:any){
-    this.adicionalesService.deleteAdicionales(this.idLesion).subscribe(()=>{})
+    asignarLesion(idTipoLesion){
+      this.lesionService.modificarLesiones(idTipoLesion,this.listaLesiones,this.id).subscribe(()=>{ this.lesionService.getLesionPorId(this.id).subscribe((lesion: any) => {this.listaLesiones = lesion});})
+    }
+
+    borrarAdicionales(idTipo:number){
+    this.adicionalesService.deleteAdicionales(idTipo,this.idLesion).subscribe(()=>{this.adicionalesService.getAdicionales(this.idLesion).subscribe((adicionales: any)=>{this.listaAdicionales=adicionales})  })
   }
   ngOnInit(): void {
     this.scrollToBottom();
