@@ -13,7 +13,7 @@ export class PerfilComponent implements OnInit {
   passwordincorrecta=false;
   passwordCorrecta=false;
   cambiosCorrectos=false;
-  user = {nombre: '', apellido: '', telefono:'', direccion:'' };  ;
+  user = {nombre: '', apellido: '', telefono:'', direccion:'',recibir_notificaciones:false };
   respuestaContrasenia:any;
 
   constructor(public cookieService:CookieService,public perfilService: PerfilService) {

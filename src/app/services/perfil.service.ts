@@ -21,6 +21,7 @@ export class PerfilService {
       telefono: user.telefono,
       direccion: user.direccion,
       id_rol:1,
+      recibir_notificaciones:user.recibir_notificaciones,
       activo:true
     };
     return this.http.put('http://localhost:8080/usuarios/'+id, data);

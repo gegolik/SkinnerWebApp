@@ -30,7 +30,6 @@ export class AdministracionmedicosserviceService {
       email: nuevoMedico.email,
       telefono: nuevoMedico.telefono,
       direccion: nuevoMedico.direccion,
-      password: "pass",
       id_rol: 1,
       activo:true
     };

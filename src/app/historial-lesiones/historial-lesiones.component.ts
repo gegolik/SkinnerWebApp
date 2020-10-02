@@ -6,6 +6,7 @@ import { AdicionalesService } from '../services/adicionales.service';
 import { MensajeService } from '../services/mensaje.service';
 import { CookieService } from 'ngx-cookie-service';
 import {LesionService} from '../services/lesion.service';
+import {UserService} from '../services/user.service';
 declare var $: any;
 @Component({
   selector: 'app-historial-lesiones',
@@ -84,7 +85,8 @@ listaLesiones:any;
 listaTipoLesiones:any;
 listaUsuarios:any;
 mensajeAEnviar:any;
-  constructor(public lesionService:LesionService,public mensajeSevice:MensajeService, public historiaLesionesService: HistoriaLesionesService,public adicionalesService: AdicionalesService, private route:ActivatedRoute,public tratservice:TratamientoService,public cookieService:CookieService) {
+recibeNotificaciones:any;
+  constructor(public userService:UserService,public lesionService:LesionService,public mensajeSevice:MensajeService, public historiaLesionesService: HistoriaLesionesService,public adicionalesService: AdicionalesService, private route:ActivatedRoute,public tratservice:TratamientoService,public cookieService:CookieService) {
     this.id=this.route.snapshot.params.id;
     this.historiaLesionesService.getHistorialLesionesPorId(this.id).subscribe((lesiones: any)=>{this.historialLesion=lesiones});
     this.historiaLesionesService.getTratamientosLesiones(this.id).subscribe((tratamientosasignados: any)=>{this.listaTratamientosAsignados=tratamientosasignados})
@@ -94,7 +96,7 @@ mensajeAEnviar:any;
     this.lesionService.getLesionPorId(this.id).subscribe((lesion: any) => {this.listaLesiones = lesion});
     this.idDoctor=parseInt(this.cookieService.get('autenticado'));
     this.lesionService.getTipoLesiones().subscribe((tipoLesiones: any) => {this.listaTipoLesiones = tipoLesiones});
-
+    this.userService.getRecibeNotificaciones(parseInt(this.cookieService.get('autenticado'))).subscribe((recibenoticaciones: any) => {this.recibeNotificaciones = recibenoticaciones.recibir_notificaciones});
     
   }
 

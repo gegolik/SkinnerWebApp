@@ -13,6 +13,7 @@ export class AdministracionmedicosComponent implements OnInit {
   selectedValue: string = '';
   listaMedicos: any;
   tipoLesiones: any;
+  respuestaCreacion:any;
   constructor(public medicosService:AdministracionmedicosserviceService) { 
     this.getListaMedicos();
   }
@@ -44,7 +45,8 @@ export class AdministracionmedicosComponent implements OnInit {
 
   public agregarMedico(med: medicoObject) {
     console.log(this.nuevoMedico);
-    this.medicosService.addMedico(this.nuevoMedico).subscribe((response) => {
+    this.medicosService.addMedico(this.nuevoMedico).subscribe((pass: any) => {
+      this.respuestaCreacion=pass;
         this.getListaMedicos();
       });
   }
