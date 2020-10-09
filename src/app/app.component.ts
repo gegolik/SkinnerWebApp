@@ -16,14 +16,19 @@ export class AppComponent {  respuesta=[]
   private cookieValue: string;
   credentials = {username: '', password: ''};
   olvidarContrasenia=false;
+  
   constructor(private app: AppserviceService,public cookieService:CookieService,public userService: UserService, public appService:AppserviceService,private route:ActivatedRoute,private router: Router) {
   this.userService.getData().subscribe((users: any)=>{this.respuesta=users});
   var id=this.route.snapshot.params.id;
-  
   if(this.appService.estoyAutenticado()){
     setInterval(()=>{ this.appService.getNotificaciones(parseInt(this.cookieService.get('autenticado'))).subscribe((notificaciones: any)=>{this.cantNotificaciones=notificaciones;console.log("ENTRE")});},5000)
   }
   }
+
+  isLogged(){
+    return parseInt(this.cookieService.get('autenticado'))
+  }
+
   logout() {
     this.appService.authenticated = false;
     this.appService.logOut();
