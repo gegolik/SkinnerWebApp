@@ -14,6 +14,14 @@ export class ListadoLesionesComponent implements OnInit {
   numeros:any;
   public pieChartOptions: ChartOptions = {
     responsive: true,
+    tooltips: {
+      mode: 'label',
+      callbacks: {
+          label: function(tooltipItem, data) {
+              return data['datasets'][0]['data'][tooltipItem['index']] + '%';
+          }
+      }
+  },
   };
   public pieChartLabels: Label[] = [['Melanoma'], ['Vitiligo'], ['Lunar'], 'Psoriasis'];
   public pieChartType: ChartType = 'pie';
@@ -21,7 +29,13 @@ export class ListadoLesionesComponent implements OnInit {
   public pieChartPlugins = [];
   constructor(public lesionService: LesionService,private route:ActivatedRoute) { 
     var id=this.route.snapshot.params.id;
-    this.lesionService.getLesionesPorUsuario(id).subscribe((lesiones: any)=>{this.respuesta=lesiones;});
+    this.lesionService.getLesionesPorUsuario(id).subscribe((lesiones: any)=>{
+      this.respuesta=lesiones;
+      for (let index = 0; index < lesiones.length; index++) {
+        var lesion = lesiones[index];
+        lesion.charData = this.getChartData(lesion.analisis)
+      }
+    });
     monkeyPatchChartJsTooltip();
     monkeyPatchChartJsLegend();
   }
