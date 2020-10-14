@@ -1,6 +1,6 @@
 <div class="container" style="max-width: 400px;">
 <form>
-    <h5>Modifica tu perfil</h5>
+    <h5>Modifique su perfil</h5>
     <div class="form-group">
       <label for="nombre">Nombre</label>
       <input type="text" class="form-control" id="nombre" placeholder="Nombre" [(ngModel)]="user.nombre" [ngModelOptions]="{standalone: true}">
@@ -10,15 +10,15 @@
         <input type="text" class="form-control" id="apellido" placeholder="Apellido" [(ngModel)]="user.apellido" [ngModelOptions]="{standalone: true}">
       </div>
       <div class="form-group">
-        <label for="telefono">Telefono</label>
+        <label for="telefono">Teléfono</label>
         <input type="text" class="form-control" id="telefono" placeholder="Telefono" [(ngModel)]="user.telefono" [ngModelOptions]="{standalone: true}">
       </div>
       <div class="form-group">
-        <label for="direccion">Direccion</label>
+        <label for="direccion">Dirección</label>
         <input type="text" class="form-control" id="direccion" placeholder="Direccion" [(ngModel)]="user.direccion" [ngModelOptions]="{standalone: true}">
       </div>
-      ¿Querés recibir notificaciones del paciente?<input style="padding-right: 2px;" type="checkbox" name="recibeNotificaciones" [(ngModel)]="user.recibir_notificaciones"  />
-
+      ¿Desea recibir mensajes del paciente?<input style="padding-right: 2px;" type="checkbox" name="recibeNotificaciones" [(ngModel)]="user.recibir_notificaciones"  />
+      <br>
       <button type="button" (click)="guardarPerfil(user)" class="btn btn-success">Guardar</button>
       <div *ngIf="cambiosCorrectos==true" class="alert-success" role="alert">
         <strong>Datos cambiados correctamente</strong>
@@ -26,7 +26,7 @@
       <br>
       <hr class="style13">
       <br>
-      <h5>¿Querés cambiar tu contraseña?</h5>
+      <h5>¿Desea cambiar su contraseña?</h5>
       <div class="form-group">
         <label for="passwordVieja">Contraseña actual</label>
         <input type="password" class="form-control" id="passwordVieja" placeholder="Password" [(ngModel)]="conjuntoContrasenia.passwordVieja" name="passwordVieja">
@@ -36,7 +36,7 @@
         <input type="password" class="form-control" id="passwordNueva" placeholder="Nueva password"  [(ngModel)]="conjuntoContrasenia.passwordNueva" name="passwordNueva">
       </div>
       <div class="form-group">
-        <label for="passwordNuevaRepetida">Vuelve a introducir tu contraseña</label>
+        <label for="passwordNuevaRepetida">Vuelva a introducir su contraseña</label>
         <input type="password" class="form-control" id="passwordNuevaRepetida" placeholder="Repetí tu password" [(ngModel)]="conjuntoContrasenia.passwordNuevaRepetida" name="passwordNuevaRepetida">
       </div>
       <div *ngIf="incorrecta==true" class="alert-danger" role="alert">

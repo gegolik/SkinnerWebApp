@@ -2,9 +2,10 @@
     <table class="table table-striped table-bordered table-sm">
         <thead>
             <tr>
-                <th style="text-align: center">Descripcion</th>
+                <th style="text-align: center">Descripción</th>
                 <th style="text-align: center">Vista previa</th>
-                <th style="text-align: center">Resultados del analisis</th>
+                <th style="text-align: center">Resultados del análisis</th>
+                <th style="text-align: center">Graficos</th>
             </tr>
         </thead>
         <tbody>
@@ -15,6 +16,18 @@
                 <td style="text-align: center"> <a [routerLink]="['/historial-lesiones',lesiones.id]"><img class='h-25' src="{{getUrl(lesiones.imagen)}}"></a></td>
                 <td class="col-sm-4 col-xs-4" style="text-align: center;vertical-align: middle;">
                    {{lesiones.analisis}}
+                </td>
+                <td class="col-sm-4 col-sx-4"> 
+                    <div class="chart-wrapper">
+                        <canvas baseChart 
+                        [data]="[getChartData(lesiones.analisis)]" 
+                        [labels]="pieChartLabels" 
+                        [chartType]="pieChartType"
+                        [options]="pieChartOptions"
+                        [plugins]="pieChartPlugins"
+                        [legend]="pieChartLegend">
+                      </canvas>
+                    </div>
                 </td>
             </tr>
             

@@ -9,6 +9,7 @@ import { ContentComponent } from './content/content.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import {CookieService} from 'ngx-cookie-service';
+import { ChartsModule } from 'ng2-charts';
 
 import { TratamientoContentComponent } from './tratamiento-content/tratamiento-content.component';
 import { CalendarComponent } from './calendar/calendar.component';
@@ -85,6 +86,7 @@ FullCalendarModule.registerPlugins([
     HttpClientModule,
     RouterModule.forRoot(rutas),
     FormsModule,
+    ChartsModule,
     FullCalendarModule 
   ],
   providers: [CookieService],

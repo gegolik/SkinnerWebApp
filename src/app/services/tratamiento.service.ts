@@ -13,9 +13,12 @@ export class TratamientoService {
   constructor(private http: HttpClient) {}
 
   getTratamientos() {
-    return this.http.get('http://localhost:8080/tratamientos');
+    return this.http.get('http://localhost:8080/tratamientos/');
   }
-
+  
+  getTratamientosById(id:number) {
+    return this.http.get('http://localhost:8080/tratamientos/'+id);
+  }
   addTratamiento(trat: tratamientoObject) {
     let data = {
       tipoLesion: trat.tipoLesion,

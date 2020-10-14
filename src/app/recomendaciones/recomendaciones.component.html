@@ -4,10 +4,10 @@
     
     <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#altarecomendacion"
         (click)='limpiarrecomendacion()'>
-        Nuevo recomendacion
+        Nueva recomendación
     </button>
     <button [disabled]="!selected" type="button" class="btn btn-dark" data-toggle="modal" data-target="#altarecomendacion">
-        Modificar recomendacion
+        Modificar recomendación
     </button>
 
 </div>
@@ -57,7 +57,7 @@ aria-hidden="true">
 <div class="modal-dialog" role="document">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="altarecomendacionLabel">Recomendacion</h5>
+            <h5 class="modal-title" id="altarecomendacionLabel">Recomendación</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -78,7 +78,7 @@ aria-hidden="true">
             <div class="row">
                 <div class="col-12">
                     <div class="form-group">
-                        <label for="usr">Título de recomendacion</label>
+                        <label for="usr">Título de recomendación</label>
                         <input type="text" minlength="1" maxlength="65" [(ngModel)]="nuevorecomendacion.titulo"
                             class="form-control">
                     </div>
@@ -116,7 +116,7 @@ aria-hidden="true">
             </button>
         </div> 
         <div class="modal-body">
-            <h6>La recomendacion se guardado exitosamente</h6>
+            <h6>La recomendación se guardado exitosamente</h6>
         </div>
     </div>
 </div>

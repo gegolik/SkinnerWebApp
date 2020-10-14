@@ -90,10 +90,9 @@ recibeNotificaciones:any;
     this.id=this.route.snapshot.params.id;
     this.historiaLesionesService.getHistorialLesionesPorId(this.id).subscribe((lesiones: any)=>{this.historialLesion=lesiones});
     this.historiaLesionesService.getTratamientosLesiones(this.id).subscribe((tratamientosasignados: any)=>{this.listaTratamientosAsignados=tratamientosasignados})
-    this.tratservice.getTratamientos().subscribe((tratamientos: any) => {this.listaTratamientos = tratamientos});
-    this.mensajeSevice.getMensajes(this.id).subscribe((mensajes: any) => {this.listaMensajes = mensajes; this.scrollToBottom();});
-    this.lesionService.getUsuariosPorLesionId(this.id).subscribe((usuarios: any) => {this.listaUsuarios = usuarios});
-    this.lesionService.getLesionPorId(this.id).subscribe((lesion: any) => {this.listaLesiones = lesion});
+    this.lesionService.getUsuariosPorLesionId(this.id).subscribe((usuarios: any) => {this.listaUsuarios = usuarios[0];this.mensajeSevice.getMensajes(this.id).subscribe((mensajes: any) => {this.listaMensajes = mensajes; this.scrollToBottom();});});
+    this.lesionService.getLesionPorId(this.id).subscribe((lesion: any) => {this.listaLesiones = lesion;    this.tratservice.getTratamientosById(parseInt(this.listaLesiones[0].id_tipo)).subscribe((tratamientos: any) => {this.listaTratamientos = tratamientos});
+  });
     this.idDoctor=parseInt(this.cookieService.get('autenticado'));
     this.lesionService.getTipoLesiones().subscribe((tipoLesiones: any) => {this.listaTipoLesiones = tipoLesiones});
     this.userService.getRecibeNotificaciones(parseInt(this.cookieService.get('autenticado'))).subscribe((recibenoticaciones: any) => {this.recibeNotificaciones = recibenoticaciones.recibir_notificaciones});
@@ -117,7 +116,7 @@ recibeNotificaciones:any;
   }
   setMensaje(mensaje:any){
 
-    this.mensajeSevice.createMensaje(mensaje,this.idDoctor,this.listaUsuarios[0].id_paciente,parseInt(this.id)).subscribe((mensajes: any)=>{this.mensajeAEnviar="";     this.mensajeSevice.getMensajes(this.id).subscribe((mensajes: any) => {this.listaMensajes = mensajes; this.scrollToBottom();});
+    this.mensajeSevice.createMensaje(mensaje,this.idDoctor,this.listaUsuarios.id_paciente,parseInt(this.id)).subscribe((mensajes: any)=>{this.mensajeAEnviar="";     this.mensajeSevice.getMensajes(this.id).subscribe((mensajes: any) => {this.listaMensajes = mensajes; this.scrollToBottom();});
   })
   }
 
@@ -126,7 +125,7 @@ recibeNotificaciones:any;
   }
 
     asignarLesion(idTipoLesion){
-      this.lesionService.modificarLesiones(idTipoLesion,this.listaLesiones,this.id).subscribe(()=>{ this.lesionService.getLesionPorId(this.id).subscribe((lesion: any) => {this.listaLesiones = lesion});})
+      this.lesionService.modificarLesiones(idTipoLesion,this.listaLesiones,this.id).subscribe(()=>{ this.lesionService.getLesionPorId(this.id).subscribe((lesion: any) => {this.listaLesiones = lesion;this.tratservice.getTratamientosById(parseInt(this.listaLesiones[0].id_tipo)).subscribe((tratamientos: any) => {this.listaTratamientos = tratamientos})});})
     }
 
     borrarAdicionales(idTipo:number){

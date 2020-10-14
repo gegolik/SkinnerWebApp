@@ -8,9 +8,9 @@
     </div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">Fecha de solicitud: {{asignacion.fecha_creacion| date:"dd/MM/yyyy 'a las' HH:mm"}}</li>
-      <li class="list-group-item">Seccion: {{asignacion.seccion}}</li>
-      <li class="list-group-item">Ubicacion: {{asignacion.ubicacion}}</li>
-      <li class="list-group-item">Analisis: {{asignacion.analisis}}</li>
+      <li class="list-group-item">Sección: {{asignacion.seccion}}</li>
+      <li class="list-group-item">Ubicación: {{asignacion.ubicacion}}</li>
+      <li class="list-group-item">Análisis: {{asignacion.analisis}}</li>
     </ul>
     <div class="card-body">
         <button type="button" (click)="updateAsignacion(true, asignacion.id)" style="margin-right: 10px" class="btn btn-success">Aprobar</button>
