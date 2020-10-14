@@ -32,7 +32,7 @@ export class AppComponent {  respuesta=[]
   logout() {
     this.appService.authenticated = false;
     this.appService.logOut();
-    this.router.navigateByUrl('/login');
+    this.router.navigateByUrl('/home');
 
   }
   login() {

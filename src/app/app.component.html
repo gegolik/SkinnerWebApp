@@ -8,11 +8,11 @@
           <a class="title" style="align-self: center;">Skinner App</a> </div>
         <div class="list-group list-group-flush">
             <a href="/home" class="list-group-item list-group-item-action bg-light">Home</a>
-          <a href="#" class="list-group-item list-group-item-action bg-light">Pacientes</a>
-          <a [routerLink]="['/tratamientos']" class="list-group-item list-group-item-action bg-light">Tratamientos</a>
-          <a [routerLink]="['/medicos']" class="list-group-item list-group-item-action bg-light">Médicos</a>
-          <a [routerLink]="['/calendar']" class="list-group-item list-group-item-action bg-light">Agenda</a>
-          <a [routerLink]="['/recomendaciones']" class="list-group-item list-group-item-action bg-light">Recomendaciones</a>
+          <a *ngIf="isLogged()" href="#" class="list-group-item list-group-item-action bg-light">Pacientes</a>
+          <a *ngIf="isLogged()" [routerLink]="['/tratamientos']" class="list-group-item list-group-item-action bg-light">Tratamientos</a>
+          <a *ngIf="isLogged()" [routerLink]="['/medicos']" class="list-group-item list-group-item-action bg-light">Médicos</a>
+          <a *ngIf="isLogged()" [routerLink]="['/calendar']" class="list-group-item list-group-item-action bg-light">Agenda</a>
+          <a *ngIf="isLogged()" [routerLink]="['/recomendaciones']" class="list-group-item list-group-item-action bg-light">Recomendaciones</a>
           <a href="#" class="list-group-item list-group-item-action bg-light">Contacto</a>
         </div>
       </div>
@@ -30,7 +30,7 @@
               <li class="nav-item active" *ngIf="!isLogged()">
                       <a class="nav-link" href="#" data-toggle="modal" data-target="#formLogin">Login <span class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item active">
+                    <li class="nav-item active" *ngIf="isLogged()">
                       <a class="nav-link" [routerLink]="['/perfil']">Perfil <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item active" *ngIf="isLogged()">
