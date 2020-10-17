@@ -6,7 +6,7 @@
             (click)='limpiarTratamiento()'>
             Nuevo Tratamiento
         </button>
-        <button [disabled]="!selected" type="button" class="btn btn-dark" data-toggle="modal" data-target="#altaTratamiento">
+        <button [disabled]="!selected" type="button" class="btn btn-dark" data-toggle="modal" data-target="#altaTratamiento" (click)="isEdit=true">
             Modificar Tratamiento
         </button>
     
@@ -33,7 +33,7 @@
                             value="option1" (click)=assignTratamiento(tratamiento)>
                     </div>
                 </td>
-                <td>{{tratamiento.tipolesion}}</td>
+                <td>{{tratamiento.tipoLesion}}</td>
                 <td>{{tratamiento.titulo}}</td>
                 <td>{{tratamiento.descripcion}}</td>
                 <td>
@@ -67,7 +67,7 @@
                     <div class="col-6">
                         <div class="form-group">
                             <label for="usr">Tipo de Lesión</label>
-                            <select [(ngModel)]="nuevoTratamiento.tipoLesion" class="form-control">
+                            <select [(ngModel)]="nuevoTratamiento.id_tipo" class="form-control">
                                 <option *ngFor="let lesionItem of tipoLesiones" [ngValue]="lesionItem.id">
                                     {{ lesionItem.descripcion }}
                                 </option>

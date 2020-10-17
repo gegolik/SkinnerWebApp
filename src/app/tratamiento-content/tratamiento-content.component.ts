@@ -15,6 +15,7 @@ export class TratamientoContentComponent implements OnInit {
   selectedValue: string = '';
   listaTratamientos: any;
   tipoLesiones: any;
+  isEdit: boolean = false;
   constructor(public tratservice: TratamientoService, public lesionService: LesionService) {
     this.getTratamientos();
     this.getTipoLesiones();
@@ -26,6 +27,7 @@ export class TratamientoContentComponent implements OnInit {
 
   public getTratamientos() {
     this.tratservice.getTratamientos().subscribe((tratamientos: any) => {
+      this.selected = null;
       this.listaTratamientos = tratamientos;
     });
   }
@@ -39,15 +41,26 @@ export class TratamientoContentComponent implements OnInit {
 
   
   public agregarTratamiento(trat: tratamientoObject) {
-    console.log(this.nuevoTratamiento);
-    this.tratservice
-      .addTratamiento(this.nuevoTratamiento)
+    if(this.isEdit){
+      this.tratservice
+      .modificarTratamiento(trat)
       .subscribe((response) => {
         this.getTratamientos();
       });
+    }else{
+      console.log("trat", trat)
+
+      this.tratservice
+        .addTratamiento(trat)
+        .subscribe((response) => {
+          this.getTratamientos();
+        });
+    }
   }
 
   public limpiarTratamiento() {
+    this.selected = null;
+    this.isEdit = false;
     this.nuevoTratamiento = new tratamientoObject();
   }
 
@@ -63,6 +76,7 @@ export class TratamientoContentComponent implements OnInit {
 
   public assignTratamiento(trat: tratamientoObject) {
     this.selected = trat;
+    console.log(trat)
     Object.assign(this.nuevoTratamiento, trat);
     console.log(this.nuevoTratamiento)
   }

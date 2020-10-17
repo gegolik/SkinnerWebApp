@@ -21,11 +21,21 @@ export class TratamientoService {
   }
   addTratamiento(trat: tratamientoObject) {
     let data = {
-      tipoLesion: trat.tipoLesion,
+      tipoLesion: trat.id_tipo,
       titulo: trat.titulo,
       descripcion: trat.descripcion,
     };
     return this.http.post('http://localhost:8080/tratamientos', data);
+  }
+
+  modificarTratamiento(trat) {
+    console.log(trat)
+    let data = {
+      tipoLesion: trat.id_tipo,
+      titulo: trat.titulo,
+      descripcion: trat.descripcion,
+    };
+    return this.http.put('http://localhost:8080/tratamientos/'+trat.id, data);
   }
 
   deleteTratamiento(id: number) {
@@ -34,6 +44,7 @@ export class TratamientoService {
 
   nuevoTratamiento(): tratamientoObject {
     return {
+      id_tipo: 1,
       codigo: this.tratamientos.length,
       tipoLesion: 1,
       titulo: '',
