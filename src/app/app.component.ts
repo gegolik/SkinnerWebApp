@@ -13,6 +13,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class AppComponent {  respuesta=[]
   cantNotificaciones: any;
   http: any;
+  loading:boolean = false; 
   private cookieValue: string;
   credentials = {username: '', password: ''};
   olvidarContrasenia=false;
