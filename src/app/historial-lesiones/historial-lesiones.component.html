@@ -83,11 +83,11 @@
                                     <ul class="chat-list">
                                         <li *ngFor="let mensaje of listaMensajes" [ngClass]="(mensaje.id_origen_usuario==listaUsuarios.id_paciente)?'out':'in'">
                                             <div class="chat-img">
-                                                <img alt="Avtar" src="../../assets/doctor.png">
+                                                <img alt="Avtar" [src]="(mensaje.id_origen_usuario==listaUsuarios.id_paciente)?'../../assets/empleado.png':'../../assets/doctor.png'">
                                             </div>
                                             <div class="chat-body">
                                                 <div class="chat-message">
-                                                    <h5>{{mensaje.nombre_origen+" "+mensaje.apellido_origen}}</h5>
+                                                    <h5><b>{{mensaje.nombre_origen+" "+mensaje.apellido_origen}}</b></h5>
                                                     <p>{{mensaje.mensaje}}</p>
                                                 </div>
                                             </div>
