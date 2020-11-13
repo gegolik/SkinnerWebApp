@@ -15,4 +15,8 @@ export class AdicionalesService {
   deleteAdicionales(id: number,idLesion:number) {
     return this.http.delete('http://localhost:8080/adicionales/' + idLesion+"/"+id);
   }
+
+  public getCountAdicionales(id:number) {
+    return this.http.get('http://localhost:8080/adicionales/'+id+"/count");
+  }
 }

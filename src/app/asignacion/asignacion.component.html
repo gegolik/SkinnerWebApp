@@ -1,5 +1,5 @@
 <div class="flex-container">
-    <div *ngIf="!respuesta||respuesta.length==0">No tenes asignaciones pendientes</div>
+    <div *ngIf="!respuesta||respuesta.length==0">No posee asignaciones pendientes</div>
 <div *ngFor="let asignacion of respuesta"class="card" style="width: 18rem;">
     <img class="card-img-top" src="data:image/png;base64,{{asignacion.imagen}}">
     <div class="card-body">

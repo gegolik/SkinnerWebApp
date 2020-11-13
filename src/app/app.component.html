@@ -49,15 +49,17 @@
                       <a class="nav-link" (click)="logout()" href="#">Logout</a>
                     </li>
               <li class="nav-item dropdown">
-                <a [routerLink]="['/asignaciones']" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
+                <a  class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
                   aria-haspopup="true" aria-expanded="false">
                   <ion-icon name="notifications-outline"></ion-icon>
-                  <span class="badge badge-danger">{{cantNotificaciones}}</span> 
+                  <span class="badge badge-danger">{{cantNotificaciones + cantAsignaciones}}</span> 
                 </a>
-                <!--div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" data-toggle="modal" data-target="#formLogin">Loguearse</a>
-                  <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" [routerLink]="['/notificaciones']">Notificaciones <span class="badge badge-danger">{{cantNotificaciones}}</span> </a> 
                   <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" [routerLink]="['/asignaciones']">Asignaciones <span class="badge badge-danger">{{cantAsignaciones}}</span> </a> 
+                </div>
+                  <!--div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="#">Something else here</a>
                 </div-->
               </li>

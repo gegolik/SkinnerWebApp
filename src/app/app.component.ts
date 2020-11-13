@@ -11,7 +11,8 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {  respuesta=[]
-  cantNotificaciones: any;
+  cantNotificaciones=0;
+  cantAsignaciones=0;
   http: any;
   loading:boolean = false; 
   private cookieValue: string;
@@ -22,7 +23,7 @@ export class AppComponent {  respuesta=[]
   this.userService.getData().subscribe((users: any)=>{this.respuesta=users});
   var id=this.route.snapshot.params.id;
   if(this.appService.estoyAutenticado()){
-    setInterval(()=>{ this.appService.getNotificaciones(parseInt(this.cookieService.get('autenticado'))).subscribe((notificaciones: any)=>{this.cantNotificaciones=notificaciones;console.log("ENTRE")});},5000)
+    setInterval(()=>{ this.appService.getNotificaciones(parseInt(this.cookieService.get('autenticado'))).subscribe((notificaciones: any)=>{this.cantNotificaciones=notificaciones.notificaciones;this.cantAsignaciones=notificaciones.asignaciones;});},5000)
   }
   }
 

@@ -34,6 +34,7 @@ import { AdministracionmedicosComponent } from './administracionmedicos/administ
 import { RecomendacionContentComponent } from './recomendaciones/recomendaciones.component';
 import { AsignacionComponent } from './asignacion/asignacion.component';
 import { PerfilComponent } from './perfil/perfil.component';
+import { NotificacionComponent } from './notificacion/notificacion.component';
 //MODELS
 //import { tratamientoObject } from './Models/tratamiento_model';
 
@@ -51,7 +52,7 @@ const rutas: Routes = [
   ,{ path: 'recomendaciones', component: RecomendacionContentComponent}
   ,{ path: 'asignaciones', component: AsignacionComponent}
   ,{ path: 'perfil', component: PerfilComponent}
-  ,
+  ,{ path: 'notificaciones', component: NotificacionComponent}
 
   //,{ path: 'pacientes', component:PacientesContentComponent}
   //,{ path: 'miperfil', component:PerfilContentComponent}
@@ -79,7 +80,8 @@ FullCalendarModule.registerPlugins([
     AdministracionmedicosComponent,
     RecomendacionContentComponent,
     AsignacionComponent,
-    PerfilComponent  ],
+    PerfilComponent,
+    NotificacionComponent  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

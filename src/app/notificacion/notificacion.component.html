@@ -1,0 +1,15 @@
+<div class="flex-container">
+    <div *ngIf="!respuesta||respuesta.length==0">No posee notificaciones pendientes</div>
+<div *ngFor="let asignacion of respuesta"class="card" style="width: 18rem;">
+    <img class="card-img-top" src="data:image/png;base64,{{asignacion.imagen}}">
+    <div class="card-body">
+      <h5 class="card-title">{{asignacion.nombre}} {{asignacion.apellido}}<p>ha cargado una nueva lesión</p>  </h5>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Fecha y hora: {{asignacion.fecha_creacion| date:"dd/MM/yyyy 'a las' HH:mm"}}</li>
+    </ul>
+    <div class="card-body">
+        <a [routerLink]="['/historial-lesiones',asignacion.id_lesion]"><button type="button" (click)="borrarNotificacion(asignacion.id)" style="margin-right: 10px" class="btn btn-info">Ver Historial</button> </a>
+    </div>
+  </div>
+</div>
