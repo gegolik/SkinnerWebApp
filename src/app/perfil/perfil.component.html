@@ -17,7 +17,8 @@
         <label for="direccion">Dirección</label>
         <input type="text" class="form-control" id="direccion" placeholder="Direccion" [(ngModel)]="user.direccion" [ngModelOptions]="{standalone: true}">
       </div>
-      ¿Desea recibir mensajes del paciente?<input style="padding-right: 2px;" type="checkbox" name="recibeNotificaciones" [(ngModel)]="user.recibir_notificaciones"  />
+      ¿Desea activar el envío de mensajes por parte de todos los pacientes? <input style="padding-right: 2px;" type="checkbox" name="recibeNotificaciones" [(ngModel)]="user.recibir_notificaciones"  />
+      <br>
       <br>
       <button type="button" (click)="guardarPerfil(user)" class="btn btn-success">Guardar</button>
       <div *ngIf="cambiosCorrectos==true" class="alert-success" role="alert">
