@@ -3,6 +3,7 @@ import { LesionService } from '../services/lesion.service';
 import { ActivatedRoute } from '@angular/router';
 import { ChartType, ChartOptions } from 'chart.js';
 import { SingleDataSet, Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip } from 'ng2-charts';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-listado-lesiones',
@@ -27,15 +28,27 @@ export class ListadoLesionesComponent implements OnInit {
   public pieChartType: ChartType = 'pie';
   public pieChartLegend = true;
   public pieChartPlugins = [];
-  constructor(public lesionService: LesionService,private route:ActivatedRoute) { 
+  public pieChartColors: Array < any > = [{
+    backgroundColor: ['rgb(103,205,205)', 'rgb(101,204,101)', 'rgb(255,153,154)','rgb(255,204,104)']
+ }];
+  constructor(public lesionService: LesionService,private route:ActivatedRoute,public appComponent: AppComponent,
+    ) { 
     var id=this.route.snapshot.params.id;
+    this.appComponent.loading = true;
+    try{
     this.lesionService.getLesionesPorUsuario(id).subscribe((lesiones: any)=>{
       this.respuesta=lesiones;
       for (let index = 0; index < lesiones.length; index++) {
         var lesion = lesiones[index];
         lesion.charData = this.getChartData(lesion.analisis)
       }
+      this.appComponent.loading = false;
+
     });
+  }
+  catch(error){
+    this.appComponent.loading = false;
+  }
     monkeyPatchChartJsTooltip();
     monkeyPatchChartJsLegend();
   }

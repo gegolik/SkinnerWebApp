@@ -3,7 +3,7 @@ import { AsignacionService } from '../services/asignacion.service';
 import { HistoriaLesionesService } from '../services/historia-lesiones.service';
 import { ActivatedRoute } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import { ChartType, ChartOptions } from 'chart.js';
+import { ChartType, ChartOptions, ChartColor } from 'chart.js';
 import {
   SingleDataSet,
   Label,
@@ -19,7 +19,6 @@ import { AppComponent } from '../app.component';
 export class AsignacionComponent implements OnInit {
   respuesta: any;
   respuestaAsignacion: any;
-  loading: boolean = false;
   public pieChartOptions: ChartOptions = {
     responsive: true,
     tooltips: {
@@ -40,7 +39,9 @@ export class AsignacionComponent implements OnInit {
   public pieChartType: ChartType = 'pie';
   public pieChartLegend = true;
   public pieChartPlugins = [];
-  constructor(
+  public pieChartColors: Array < any > = [{
+    backgroundColor: ['rgb(103,205,205)', 'rgb(101,204,101)', 'rgb(255,153,154)','rgb(255,204,104)']
+ }];  constructor(
     public appComponent: AppComponent,
     public cookieService: CookieService,
     public asignacionService: AsignacionService,
@@ -48,9 +49,8 @@ export class AsignacionComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     var id = this.route.snapshot.params.id;
-    this.appComponent.loading = false;
     this.traerAsignaciones();
-  }
+    }
 
   ngOnInit(): void {}
 
@@ -82,12 +82,11 @@ export class AsignacionComponent implements OnInit {
             var lesion = asignacion[index];
             lesion.charData = this.getChartData(lesion.analisis);
           }
+          this.appComponent.loading = false;
         });
     } catch (error) {
       this.appComponent.loading = false;
-    } finally {
-      this.appComponent.loading = false;
-    }
+    } 
   }
   public getChartData(resultadoAnalisis: any) {
     var resultadoParse = JSON.parse(resultadoAnalisis);

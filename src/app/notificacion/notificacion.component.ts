@@ -14,7 +14,6 @@ import { AppComponent } from '../app.component';
 export class NotificacionComponent implements OnInit {
   respuesta: any;
   respuestaAsignacion: any;
-  loading: boolean = false;
   constructor(
     public appComponent: AppComponent,
     public cookieService: CookieService,
@@ -49,12 +48,11 @@ export class NotificacionComponent implements OnInit {
           for (let index = 0; index < asignacion.length; index++) {
             var lesion = asignacion[index];
           }
+          this.appComponent.loading = false;
         });
     } catch (error) {
       this.appComponent.loading = false;
-    } finally {
-      this.appComponent.loading = false;
-    }
+    } 
   }
 }
 
