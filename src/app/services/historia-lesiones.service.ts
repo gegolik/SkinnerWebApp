@@ -28,6 +28,13 @@ export class HistoriaLesionesService {
 
   }
 
+  public actualizarAnalisis(historial){
+    let data = JSON.stringify(historial.analisis)
+    console.log(data)
+    return this.http.put('http://localhost:8080/historial/analisis/'+historial.id, data);
+
+  }
+
   public asignarTratamientos(tratamientoNuevoid:number,lesion:any){
 
       let data = {

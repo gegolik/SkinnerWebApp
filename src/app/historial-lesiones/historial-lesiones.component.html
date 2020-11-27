@@ -11,7 +11,26 @@
                         <div class="small text-gray mb-4"><i class="fa fa-clock-o mr-1"></i>Fecha de la foto: {{historial.fecha| date:"dd/MM/yyyy 'a las' HH:mm'hs'"}} </div>
                         <div class="text-center" ><img style='max-width:400px ;' src="data:image/png;base64,{{historial.imagen}}"></div>
                         <p class="text-small mt-2 font-weight-light">{{historial.descripcion}}</p>
-                        <!--p class="text-small mt-2 font-weight-light">Resultados del analisis: {{historial.analisis}}</p-->
+                        <div *ngIf="historial.analisis && historial.analisis.diametro">
+                            Diámetro:
+                            <input style="width: 70px;" type="number" min="1" [(ngModel)]="historial.analisis.diametro" (ngModelChange)="checkValue(historial.analisis, $event, 'diametro')">
+                            cm.
+                        </div>
+                        <div *ngIf="historial.analisis && historial.analisis.palmas">
+                            Diámetro:
+                            <input style="width: 70px;" type="number" min="1" [(ngModel)]="historial.analisis.palmas" (ngModelChange)="checkValue(historial.analisis, $event, 'palmas')">
+                            palmas
+                        </div>
+                        <p *ngIf="historial.analisis && historial.analisis.asimetria" class="text-small mt-2 font-weight-light">
+                            Asimetría: {{historial.analisis.asimetria}}
+                        </p>
+                        <div class="text-center mb-3">
+                            <button *ngIf="historial.analisis && (historial.analisis.diametro || historial.analisis.palmas)"
+                            type="button"
+                            class="btn btn-primary" data-toggle="modal" (click)="actualizarAnalisis(historial)">Guardar Cambios</button>
+                        </div>
+                        
+                       
                         <!--button type="button" class="btn btn-success btn-block">Comentario</button-->
                         <button type="button"  class="btn btn-success btn-block" data-toggle="modal" data-target="#imagenesAdicionales" (click)='getAdicionales(historial.id)'>Ver Adicionales</button>
             
@@ -130,7 +149,7 @@ aria-hidden="true">
             <div class="row">
                 <div class="col-12">
                     <div class="form-group" *ngFor="let adicionales of listaAdicionales;let i = index">
-                        <h3 class="text-center">Imágen extraida N° {{i+1}}</h3>
+                        <h3 class="text-center">Imagen extraida N° {{i+1}}</h3>
                         <div class="text-center" ><img style='max-width:200px ;' src="data:image/png;base64,{{adicionales.recortada}}"></div>
                         <br/>
                         <h3 class="text-center">Bordes N° {{i+1}}</h3>

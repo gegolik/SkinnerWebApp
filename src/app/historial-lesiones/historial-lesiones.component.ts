@@ -88,7 +88,20 @@ mensajeAEnviar:any;
 recibeNotificaciones:any;
   constructor(public userService:UserService,public lesionService:LesionService,public mensajeSevice:MensajeService, public historiaLesionesService: HistoriaLesionesService,public adicionalesService: AdicionalesService, private route:ActivatedRoute,public tratservice:TratamientoService,public cookieService:CookieService) {
     this.id=this.route.snapshot.params.id;
-    this.historiaLesionesService.getHistorialLesionesPorId(this.id).subscribe((lesiones: any)=>{this.historialLesion=lesiones});
+    this.historiaLesionesService.getHistorialLesionesPorId(this.id).subscribe((lesiones: any)=>{
+      this.historialLesion=lesiones
+      
+        let result = {};
+        for (let i = 0; i < lesiones.length; i++) {
+          const element = lesiones[i];
+          if(lesiones[i].analisis && Object.entries(lesiones[i].analisis).length !== 0){
+            lesiones[i].analisis = JSON.parse(lesiones[i].analisis);
+            console.log(lesiones[i].analisis)
+          }else{
+            lesiones[i].analisis = result;
+          }
+        }
+    });
     this.historiaLesionesService.getTratamientosLesiones(this.id).subscribe((tratamientosasignados: any)=>{this.listaTratamientosAsignados=tratamientosasignados})
     this.lesionService.getUsuariosPorLesionId(this.id).subscribe((usuarios: any) => {this.listaUsuarios = usuarios[0];this.mensajeSevice.getMensajes(this.id).subscribe((mensajes: any) => {this.listaMensajes = mensajes; this.scrollToBottom();});});
     this.lesionService.getLesionPorId(this.id).subscribe((lesion: any) => {this.listaLesiones = lesion;    this.tratservice.getTratamientosById(parseInt(this.listaLesiones[0].id_tipo)).subscribe((tratamientos: any) => {this.listaTratamientos = tratamientos});
@@ -143,4 +156,19 @@ scrollToBottom(): void {
       this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
   } catch(err) { }                 
 }
+
+actualizarAnalisis(historial){
+  this.historiaLesionesService.actualizarAnalisis(historial).subscribe(()=>{this.actualizarTratamientos();})
+}
+
+checkValue(analisis, valor, tipo){
+  if(!valor || valor < 1){
+    if(tipo == 'diametro'){
+      analisis.diametro = 1;
+    }else if(tipo == 'palmas'){
+      analisis.palmas = 1;
+    }
+  }
+}
+
 }
