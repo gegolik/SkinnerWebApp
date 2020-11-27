@@ -11,7 +11,7 @@
                         <div class="small text-gray mb-4"><i class="fa fa-clock-o mr-1"></i>Fecha de la foto: {{historial.fecha| date:"dd/MM/yyyy 'a las' HH:mm'hs'"}} </div>
                         <div class="text-center" ><img style='max-width:400px ;' src="data:image/png;base64,{{historial.imagen}}"></div>
                         <p class="text-small mt-2 font-weight-light">{{historial.descripcion}}</p>
-                        <div *ngIf="historial.analisis && historial.analisis.diametro">
+                        <div *ngIf="historial.analisis && listaLesiones[0] && (listaLesiones[0].id_tipo == 1 || listaLesiones[0].id_tipo == 4)">
                             Diámetro:
                             <input style="width: 70px;" type="number" min="1" [(ngModel)]="historial.analisis.diametro" (ngModelChange)="checkValue(historial.analisis, $event, 'diametro')">
                             cm.
